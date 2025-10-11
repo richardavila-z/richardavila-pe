@@ -56,3 +56,13 @@ window.addEventListener('DOMContentLoaded', event => {
 function mostrarAlertaExito() {
     alert("¡Tus datos han sido enviados con éxito!");
 }
+
+document.getElementById("contactForm").addEventListener("submit", function(e) {
+    e.preventDefault(); // Evita el envío tradicional de HTML para manejarlo con script
+    
+    // Aquí iría tu lógica para enviar los datos (por ejemplo, con fetch() o AJAX)
+    console.log("Datos enviados!");
+    
+    // Después de un envío exitoso, limpia el formulario
+    e.target.reset(); // o document.getElementById("miFormulario").reset();
+});
