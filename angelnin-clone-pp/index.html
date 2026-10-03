@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Richard Avila | Video & Fotografía Profesional</title>
+
+    <!-- Google Fonts idénticas al plan -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <!-- Textura de capa de película (grano) -->
+    <div class="texture-grain"></div>
+
+    <!-- HEADER FLOTANTE -->
+    <header class="header">
+        <a href="#" class="main-logo">
+            Richard Avila
+            <span>Video & Fotografía & Drone</span>
+        </a>
+        <!-- Enlaces a redes -->
+        <!--<div style="display:flex; gap:20px;">
+            <a href="https://instagram.com/paltarich" target="_blank">IG</a>
+            <a href="https://www.linkedin.com/in/richardavilafoto/" target="_blank">IN</a>
+        </div>-->
+    </header>
+
+    <main id="smooth-wrapper">
+        <div id="smooth-content">
+
+            <!-- 1. HERO Y MARQUEE (Como el de Angel Nin con imágenes rotadas) -->
+            <section class="hero-marquee">
+                <!-- Capas de degradado para oscurecer bordes -->
+                <div class="overlay-gradient top"></div>
+                <div class="overlay-gradient bottom"></div>
+
+                <!-- Título Central -->
+                <div class="h1-container">
+                    <h1 class="h1-anim">Richard Avila</h1>
+                    <p class="p-anim">Video & Fotografía & Drone Profesional</p>
+                </div>
+
+                <!-- Grilla en Movimiento (Marquee) -->
+                <div class="marquee-grid">
+                    <!-- Columna 1 -->
+                    <div class="marquee-column">
+                        <div class="marquee-content" style="animation-duration: 40s;">
+                            <img src="../assets/img/portfolio/thumbnails/1.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/2.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/3.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/4.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/5.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/6.jpg" alt="Foto" class="img-item">
+                            <!-- Duplicado para loop infinito fluido -->
+                            <img src="../assets/img/portfolio/thumbnails/1.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/2.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/3.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/4.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/5.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/6.jpg" alt="Foto" class="img-item">
+                        </div>
+                    </div>
+                    <!-- Columna 2 (Reversa) -->
+                    <div class="marquee-column reverse">
+                        <div class="marquee-content" style="animation-duration: 55s;">
+                            <img src="../assets/img/portfolio/thumbnails/6.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/5.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/4.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/3.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/2.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/1.jpg" alt="Foto" class="img-item">
+                            <!-- Duplicado -->
+                            <img src="../assets/img/portfolio/thumbnails/6.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/5.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/4.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/3.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/2.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/1.jpg" alt="Foto" class="img-item">
+                        </div>
+                    </div>
+                    <!-- Columna 3 -->
+                    <div class="marquee-column">
+                        <div class="marquee-content" style="animation-duration: 45s;">
+                            <img src="../assets/img/portfolio/thumbnails/3.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/1.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/4.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/6.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/2.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/5.jpg" alt="Foto" class="img-item">
+                            <!-- Duplicado -->
+                            <img src="../assets/img/portfolio/thumbnails/3.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/1.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/4.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/6.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/2.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/5.jpg" alt="Foto" class="img-item">
+                        </div>
+                    </div>
+                    <!-- Columna 4 (Reversa) -->
+                    <div class="marquee-column reverse">
+                        <div class="marquee-content" style="animation-duration: 50s;">
+                            <img src="../assets/img/portfolio/thumbnails/2.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/4.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/1.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/5.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/3.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/6.jpg" alt="Foto" class="img-item">
+                            <!-- Duplicado -->
+                            <img src="../assets/img/portfolio/thumbnails/2.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/4.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/1.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/5.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/3.jpg" alt="Foto" class="img-item">
+                            <img src="../assets/img/portfolio/thumbnails/6.jpg" alt="Foto" class="img-item">
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#video-scroll-section" class="down-arrow-container">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </a>
+            </section>
+
+            <!-- 2. VIDEO SCROLL SECTION (Animación Sticky y Opacidad cruzada) -->
+            <section id="video-scroll-section" class="video-scroll-section">
+
+                <div class="fade-content-wrapper">
+                    <div class="bg-layers">
+                        <!-- Layer 0: Commercial -->
+                        <div class="bg-wrapper layer-0 active">
+                            <video class="bg-content" loop muted playsinline autoplay>
+                                <source src="../assets/img/portfolio/Video/Portafolio-Drone.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <!-- Layer 1: Food -->
+                        <div class="bg-wrapper layer-1">
+                            <video class="bg-content" loop muted playsinline autoplay>
+                                <source src="../assets/img/portfolio/Video/retratos-c.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <!-- Layer 2: Auto -->
+                        <!--<div class="bg-wrapper layer-2">
+                        <video class="bg-content" loop muted playsinline autoplay>
+                            <source src="../assets/img/portfolio/Video/retratos.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>-->
+
+                        <!-- Overlay tenue para todos los videos para poder leer la barra lateral en mobile -->
+                        <div class="overlay"
+                            style="position: absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.3); z-index:2;">
+                        </div>
+                    </div>
+
+                    <!-- Nuevo menú lateral alineado al medio centrado como en la imagen -->
+                    <div class="sidebar-menu-fixed">
+                        <div class="sidebar-item nav-item-0 active">
+                            <div class="item-thumb">
+                                <img src="../assets/img/portfolio/thumbnails/1.jpg" alt="Commercial Product">
+                            </div>
+                            <div class="item-info">
+                                <h2 class="title-anim">VIDEO<br>DRONE</h2>
+                                <div class="text-reveal-wrapper">
+                                    <p>.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sidebar-item nav-item-1">
+                            <div class="item-thumb">
+                                <img src="./studio.jpg" alt="Advertising Food">
+                            </div>
+                            <div class="item-info">
+                                <h2 class="title-anim">FOTOGRAFIA PARA<br>LINKEDIN</h2>
+                                <div class="text-reveal-wrapper">
+                                    <p>.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="sidebar-item nav-item-2">
+                            <div class="item-thumb">
+                                <img src="../assets/img/portfolio/thumbnails/7.jpg" alt="Luxury Automotive">
+                            </div>
+                            <div class="item-info">
+                                <h2 class="title-anim">LUXURY<br>AUTOMOTIVE</h2>
+                                <div class="text-reveal-wrapper">
+                                    <p>Dynamic angles and flawless reflections for premium vehicles.</p>
+                                </div>
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ABOUT SECTION (Dos Columnas con Texto Fade In) -->
+            <section id="about-section" class="about-section">
+                <!-- Líneas de cuadrícula sutiles -->
+                <div class="grid-lines">
+                    <div class="vertical-line"></div>
+                    <div class="horizontal-line"></div>
+                </div>
+
+                <div class="about-container">
+                    <div class="about-image">
+                        <!-- Usando un placeholder local; se puede reemplazar por ../assets/img/retrato.jpg -->
+                        <img src="./about-me.png" alt="Portrait">
+                    </div>
+                    <div class="about-text">
+                        <p class="fade-text">lorem
+                            <span class="highlight">Lorem, ipsum.</span> Lorem ipsum dolor sit amet consectetur
+                            adipisicing elit. Consequuntur, eveniet! Doloremque, veniam. Suscipit atque doloribus
+                            praesentium consequatur rerum laboriosam itaque?
+
+                        </p>
+
+                        <p class="fade-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, ab.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SELECTED CLIENTS SECTION -->
+            <section id="clients-section" class="clients-section">
+                <h2 class="clients-title">NUESTROS<br>CLIENTES</h2>
+                <div class="clients-grid">
+                    <div class="client-logo"><img src="./Marcas/Century%2021%20Prestigia%20(Logo).png" alt="Century 21">
+                    </div>
+
+                    <div class="client-logo"><img src="./Marcas/INGRAM%20Micro%20(Logo)-01.png" alt="INGRAM Micro">
+                    </div>
+                    <div class="client-logo"><img src="./Marcas/LEI-Logo-(Color)%5B1%5D.png" alt="LEI"></div>
+                    <div class="client-logo"><img src="./Marcas/LOGO%20ANA%20ROMERP%20(1).png" alt="Ana Romero"></div>
+                    <div class="client-logo"><img style="transform: scale(1.5);" src="./Marcas/LinkedIn-Logo.wine.png"
+                            alt="LinkedIn"></div>
+                    <div class="client-logo"><img src="./Marcas/MUJERESPOWER%20(2).png" alt="Mujeres Power"></div>
+
+                    <div class="client-logo"><img src="./Marcas/UPC%20(Logo)-01.webp" alt="UPC"></div>
+                    <div class="client-logo"><img src="./Marcas/UPN%20(Logo)-02.png" alt="UPN"></div>
+                    <div class="client-logo"><img src="./Marcas/Universidad%20Continental%20(Logo)-01.png"
+                            alt="Universidad Continental"></div>
+                    <div class="client-logo"><img src="./Marcas/logo-marathon.png" alt="Marathon"></div>
+                </div>
+            </section>
+
+            <!-- 3. SCROLL HORIZONTAL GALLERY (Sección extra vista en Angel Nin) -->
+            <section id="horizontal-section" class="horizontal-section">
+                <div class="horizontal-container" id="horizontal-content">
+                    <div class="panel title-panel">
+                        <h2>Galería</h2>
+                    </div>
+                    <!-- Imágenes del portafolio del propio Richard como cajas tipo "Bento" -->
+                    <div class="panel bento-box">
+                        <img src="../assets/img/portfolio/thumbnails/1.jpg" alt="Work">
+                    </div>
+                    <div class="panel bento-box">
+                        <img src="../assets/img/portfolio/thumbnails/2.jpg" alt="Work">
+                    </div>
+                    <div class="panel bento-box">
+                        <img src="../assets/img/portfolio/thumbnails/3.jpg" alt="Work">
+                    </div>
+                    <div class="panel bento-box">
+                        <img src="../assets/img/portfolio/thumbnails/4.jpg" alt="Work">
+                    </div>
+                    <div class="panel bento-box">
+                        <img src="../assets/img/portfolio/thumbnails/5.jpg" alt="Work">
+                    </div>
+                    <div class="panel bento-box">
+                        <img src="../assets/img/portfolio/thumbnails/6.jpg" alt="Work">
+                    </div>
+                </div>
+            </section>
+
+            <!-- FINAL CTA / CONTACT SECTION -->
+            <section id="contact-section" class="contact-section">
+                <div class="contact-card">
+                    <h2 class="contact-title">Contáctanos</h2>
+                    <div class="contact-divider"></div>
+                    <div class="contact-footer">
+                        <!-- Reemplazar con email real -->
+                        <a href="mailto:angel@angelnin.com" class="contact-email">hola@richardavila.pe</a>
+
+                        <div class="contact-social">
+                            <a href="https://instagram.com/paltarich">Instagram</a>
+                            <a href="https://www.youtube.com/@richardavilape">Youtube</a>
+                            <a href="https://www.linkedin.com/in/richardavilafoto/">Linkedin</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Scripts de Librerías -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Lógica de Animaciones (app.js inline) -->
+    <script>
+        // 1. Iniciar Lenis para el Custom Smooth Scroll de estilo premium
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Suavidad extrema
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            infinite: false,
+        });
+
+        // Conectar Lenis a GSAP ScrollTrigger
+        lenis.on('scroll', ScrollTrigger.update);
+
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+
+        // 2. Animación Inicial (Hero)
+        gsap.from(".h1-anim", {
+            y: 50,
+            opacity: 0,
+            duration: 1.5,
+            ease: "power3.out",
+            delay: 0.2
+        });
+        gsap.from(".p-anim", {
+            y: 30,
+            opacity: 0,
+            duration: 1.5,
+            ease: "power3.out",
+            delay: 0.4
+        });
+
+        // 3. Lógica del Video Scroll (Sidebar Pegajosa y Opacidades de Capas)
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Obtenemos los ítems de la derecha y las capas del fondo a la izquierda
+        const sidebarItems = document.querySelectorAll('.sidebar-item');
+        const bgLayers = document.querySelectorAll('.bg-wrapper');
+
+        // Pinned Container que alterna clases basado en el progreso
+        ScrollTrigger.create({
+            trigger: "#video-scroll-section",
+            start: "top top",
+            end: "+=250%", // Longitud del scroll (2.5 veces la pantalla)
+            pin: ".fade-content-wrapper",
+            scrub: true,
+            onUpdate: (self) => {
+                // progresión de 0 a 1
+                let progress = self.progress;
+                // Calculamos el índice activo (0, 1 o 2) basado en el progreso
+                let index = Math.min(2, Math.floor(progress * 3));
+
+                // Evitar llamar activateLayer innecesariamente sin cambio
+                if (window.currentLayerIndex !== index) {
+                    window.currentLayerIndex = index;
+                    activateLayer(index);
+                }
+            }
+        });
+
+        // Al hacer hover en el menú se active directamente (opcional si quieren saltarse el scroll, 
+        // pero como está atado al scroll podría causar pequeños parpadeos al re-scrollear. 
+        // Lo dejaremos por si el usuario lo usa como botones rápidos)
+        sidebarItems.forEach((item, index) => {
+            item.addEventListener('mouseenter', () => {
+                window.currentLayerIndex = index;
+                activateLayer(index);
+            });
+        });
+
+        function activateLayer(index) {
+            // Cambiar videos del fondo
+            bgLayers.forEach((layer, i) => {
+                if (i === index) {
+                    layer.style.opacity = '1';
+                } else {
+                    layer.style.opacity = '0';
+                }
+            });
+
+            // Cambiar items activos en el menu
+            sidebarItems.forEach((item, i) => {
+                const info = item.querySelector('.text-reveal-wrapper p');
+                const title = item.querySelector('h2');
+                const thumb = item.querySelector('.item-thumb img');
+                if (i === index) {
+                    item.classList.add('active');
+                    // Opcional: Animar opacidad del texto p con GSAP si se desea
+                    gsap.to(info, { opacity: 1, duration: 0.3 });
+                    gsap.to(title, { opacity: 1, x: 0, duration: 0.3 });
+                    gsap.to(item, { opacity: 1, duration: 0.3 });
+                    if (thumb) gsap.to(thumb, { filter: 'grayscale(0%)', opacity: 1, duration: 0.3 });
+                } else {
+                    item.classList.remove('active');
+                    gsap.to(info, { opacity: 0, duration: 0.3 });
+                    gsap.to(title, { opacity: 0.4, x: -10, duration: 0.3 });
+                    gsap.to(item, { opacity: 0.5, duration: 0.3 });
+                    if (thumb) gsap.to(thumb, { filter: 'grayscale(100%)', opacity: 0.5, duration: 0.3 });
+                }
+            });
+        }
+
+        // Inicializar el estado activo
+        activateLayer(0);
+
+        // 4. Lógica de Scroll Horizontal (Galería)
+        const horizontalSection = document.getElementById('horizontal-section');
+        const horizontalContent = document.getElementById('horizontal-content');
+
+        // Determinar cuánto debe moverse horizontalmente: (ancho del content - ancho del viewport)
+        function getScrollAmount() {
+            let containerWidth = horizontalContent.scrollWidth;
+            return -(containerWidth - window.innerWidth);
+        }
+
+        const tween = gsap.to(horizontalContent, {
+            x: getScrollAmount,
+            ease: "none"
+        });
+
+        ScrollTrigger.create({
+            trigger: horizontalSection,
+            start: "top top",
+            end: () => `+=${getScrollAmount() * -1}`, // La duración en scroll vertical es igual al desplazamiento horizontal
+            pin: true,
+            animation: tween,
+            scrub: 1,
+            invalidateOnRefresh: true // Recalcular si hay resize de pantalla
+        });
+
+        // 5. Animación Fade In de About Section
+        gsap.utils.toArray('.fade-text').forEach((text) => {
+            gsap.from(text, {
+                scrollTrigger: {
+                    trigger: text,
+                    start: "top 85%", // Dispara un poco antes de llegar al final de pantalla
+                    toggleActions: "play none none reverse" // Vuelve atrás si se sube
+                },
+                y: 30, // Viene de abajo
+                opacity: 0,
+                duration: 1.2,
+                ease: "power3.out"
+            });
+        });
+
+        gsap.from(".about-image img", {
+            scrollTrigger: {
+                trigger: ".about-section",
+                start: "top 80%",
+                toggleActions: "play none none reverse"
+            },
+            opacity: 0,
+            scale: 0.95,
+            duration: 1.5,
+            ease: "power2.out"
+        });
+
+        // 6. Animación de Selected Clients Section
+        gsap.from(".clients-title", {
+            scrollTrigger: {
+                trigger: ".clients-section",
+                start: "top 80%",
+                toggleActions: "play none none reverse"
+            },
+            y: 30,
+            opacity: 0,
+            duration: 1
+        });
+
+        gsap.from(".client-logo", {
+            scrollTrigger: {
+                trigger: ".clients-grid",
+                start: "top 85%",
+                toggleActions: "play none none reverse"
+            },
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.1, // Efecto cascada (parece que entran uno por uno)
+            ease: "power2.out"
+        });
+
+        // Asegurarse de que los videos carguen en iOS/Mac en Autoplay silenciado
+        document.querySelectorAll('video').forEach(video => {
+            video.play().catch(e => console.log('Autoplay issue:', e));
+        });
+
+    </script>
+</body>
+
+</html>
