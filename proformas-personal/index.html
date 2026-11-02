@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Cotizaciones - 222 Studios</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        studio: {
+                            dark: '#0f0f11',
+                            card: '#18181b',
+                            accent: '#e11d48', // Red/Coral accent
+                            accentHover: '#be123c',
+                            gray: '#71717a',
+                            lightBg: '#f8fafc',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #09090b;
+            color: #f4f4f5;
+        }
+
+        /* Hoja de Cotización Formato A4 */
+        .a4-page {
+            width: 210mm;
+            min-height: 297mm;
+            background-color: #ffffff;
+            color: #111827;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            margin: 0 auto;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* Reglas de impresión para exportar PDF */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+            body {
+                background: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-container {
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 100% !important;
+            }
+            .a4-page {
+                box-shadow: none !important;
+                width: 100% !important;
+                height: 100vh !important;
+                margin: 0 !important;
+                padding: 12mm 15mm !important;
+                page-break-after: always;
+            }
+        }
+
+        /* Scrollbar personalizado para el panel lateral */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #18181b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3f3f46;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #e11d48;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col lg:flex-row antialiased selection:bg-studio-accent selection:text-white">
+
+    <!-- PANEL DE CONTROL / FORMULARIO (IZQUIERDA) -->
+    <aside class="w-full lg:w-[480px] xl:w-[520px] bg-studio-dark border-r border-zinc-800 flex flex-col h-screen no-print sticky top-0">
+        <!-- Header Panel -->
+        <div class="p-5 border-b border-zinc-800 flex justify-between items-center bg-zinc-950/60 backdrop-blur">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-lg bg-studio-accent flex items-center justify-center font-bold text-white text-lg font-display">
+                    222
+                </div>
+                <div>
+                    <h1 class="font-bold text-sm text-zinc-100 uppercase tracking-wider">Editor de Cotizaciones</h1>
+                    <p class="text-xs text-zinc-400">222 Studios S.A.C.</p>
+                </div>
+            </div>
+            <button onclick="loadSampleData()" class="px-3 py-1.5 text-xs font-medium bg-zinc-800 hover:bg-zinc-700 text-zinc-200 rounded-md transition flex items-center gap-1.5 border border-zinc-700">
+                <i class="fa-solid fa-wand-magic-sparkles text-studio-accent"></i> Demo CADE
+            </button>
+        </div>
+
+        <!-- Form Building Blocks -->
+        <div class="flex-1 overflow-y-auto p-5 space-y-6">
+
+            <!-- 1. Datos Administrativos del Documento & Logo -->
+            <section class="bg-zinc-900/50 p-4 rounded-xl border border-zinc-800/80">
+                <h2 class="text-xs font-bold text-studio-accent uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <i class="fa-regular fa-file-lines"></i> 1. Documento y Branding
+                </h2>
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-[11px] font-medium text-zinc-400 mb-1">URL / Imagen del Logo</label>
+                        <input type="text" id="logoUrl" oninput="updatePreview()" class="w-full bg-zinc-800 border border-zinc-700 rounded-md px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-studio-accent" placeholder="URL o Data URI del logo">
+                    </div>
+                    <div class="grid grid-cols-3 gap-3">
+                        <div>
+                            <label class="block text-[11px] font-medium text-zinc-400 mb-1">N° Proforma</label>
+                            <input type="text" id="docNum" value="PRO-2026-084" oninput="updatePreview()" class="w-full bg-zinc-800 border border-zinc-700 rounded-md px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-studio-accent">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-medium text-zinc-400 mb-1">Fecha Emisión</label>
+                            <input type="date" id="docDate" onchange="updatePreview()" class="w-full bg-zinc-800 border border-zinc-700 rounded-md px-2 py-1.5 text-xs text-white focus:outline-none focus:border-studio-accent">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-medium text-zinc-400 mb-1">Validez (Días)</label>
+                            <input type="number" id="docValidity" value="15" oninput="updatePreview()" class="w-full bg-zinc-800 border border-zinc-700 rounded-md px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-studio-accent">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Datos del Cliente -->
+            <section class="bg-zinc-900/50 p-4 rounded-xl border border-zinc-800/80">
+                <h2 class="text-xs font-bold text-studio-accent uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-building"></i> 2. Datos del Cliente
+                </h2>
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-[11px] font-medium text-zinc-400 mb-1">Empresa / Razón Social</label>
+                        <input type="text" id="clientCompany" value="Universidad Católica San Pablo" oninput="updatePreview()" class="w-full bg-zinc-800 border border-zinc-700 rounded-md px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-studio-accent">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[11px] font-medium text-zinc-400 mb-1">RUC / DNI</label>
+                            <input type="text" id="clientRuc" value="20148332127" oninput="updatePreview()" class="w-full bg-zinc-800 border border-zinc-700 rounded-md px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-studio-accent">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-medium text-zinc-400 mb-1">Persona de Contacto</label>
+                            <input type="text" id="clientContact" value="Estefanny Ayres" oninput="updatePreview()" class="w-full bg-zinc-800 border border-zinc-700 rounded-md px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-studio-accent">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Evento / Cobertura -->
+            <section class="bg-zinc-900/50 p-4 rounded-xl border border-zinc-800/80">
+                <h2 class="text-xs font-bold text-studio-accent uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <i class="fa-regular fa-calendar-check"></i> 3. Logística del Evento
+                </h2>
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-[11px] font-medium text-zinc-400 mb-1">Nombre / Tipo de Proyecto</label>
+                        <input type="text" id="eventName" value="CADE Educación 2026 (UCSP)" oninput="updatePreview()" class="w-full bg-zinc-800 border border-zinc-700 rounded-md px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-studio-accent">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-medium text-zinc-400 mb-1">Lugar y Sede</label>
+                        <input type="text" id="eventLocation" value="Lima, Perú" oninput="updatePreview()" class="w-full bg-zinc-800 border border-zinc-700 rounded-md px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-studio-accent">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-medium text-zinc-400 mb-1">Horarios y Fechas de Cobertura</label>
+                        <textarea id="eventSchedule" rows="2" oninput="updatePreview()" class="w-full bg-zinc-800 border border-zinc-700 rounded-md px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-studio-accent">Cobertura: 08 hrs. Mié 12 (16:30 - 20:30) | Jue 13 (16:00 - 20:00)</textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Equipo Humano & Plan -->
+            <section class="bg-zinc-900/50 p-4 rounded-xl border border-zinc-800/80">
+                <h2 class="text-xs font-bold text-studio-accent uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-users-viewfinder"></i> 4. Talento Humano & Alcance
+                </h2>
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-[11px] font-medium text-zinc-400 mb-1">Equipo Humano (Separar con comas)</label>
+                        <input type="text" id="teamMembers" value="01 Fotógrafo profesional, 01 Filmmaker principal" oninput="updatePreview()" class="w-full bg-zinc-800 border border-zinc-700 rounded-md px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-studio-accent">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-medium text-zinc-400 mb-1">Plan de Producción (Campo)</label>
+                        <textarea id="planProd" rows="2" oninput="updatePreview()" class="w-full bg-zinc-800 border border-zinc-700 rounded-md px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-studio-accent">Documentación audiovisual de la delegación y realización de 04 testimoniales de participantes (1 CADE + 3 Delegación).</textarea>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-medium text-zinc-400 mb-1">Plan de Postproducción</label>
+                        <textarea id="planPost" rows="2" oninput="updatePreview()" class="w-full bg-zinc-800 border border-zinc-700 rounded-md px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-studio-accent">Edición narrativa, corrección de color profesional, diseño sonoro, musicales con licencia comercial e integración de identidad de marca.</textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Entregables -->
+            <section class="bg-zinc-900/50 p-4 rounded-xl border border-zinc-800/80">
+                <h2 class="text-xs font-bold text-studio-accent uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-box-open"></i> 5. Entregables y Plazos
+                </h2>
+                <div class="grid grid-cols-2 gap-3 mb-3">
+                    <div>
+                        <label class="block text-[11px] font-medium text-zinc-400 mb-1">Plazo Fotos (Días hab.)</label>
+                        <input type="number" id="daysPhotos" value="2" oninput="updatePreview()" class="w-full bg-zinc-800 border border-zinc-700 rounded-md px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-studio-accent">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-medium text-zinc-400 mb-1">Plazo Video (Días hab.)</label>
+                        <input type="number" id="daysVideo" value="7" oninput="updatePreview()" class="w-full bg-zinc-800 border border-zinc-700 rounded-md px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-studio-accent">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-[11px] font-medium text-zinc-400 mb-1">Detalle de Entregables</label>
+                    <textarea id="deliverablesText" rows="3" oninput="updatePreview()" class="w-full bg-zinc-800 border border-zinc-700 rounded-md px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-studio-accent">• Galería completa + selección de fotos editadas en alta resolución.
+• 01 Video Trailer/Recap (2 min aprox) en formato horizontal con storytelling y 4 testimonios.
+• Incluye hasta 02 rondas de revisiones o ajustes.</textarea>
+                </div>
+            </section>
+
+            <!-- 6. Servicios e Inversión (Tabla Dinámica) -->
+            <section class="bg-zinc-900/50 p-4 rounded-xl border border-zinc-800/80">
+                <div class="flex justify-between items-center mb-3">
+                    <h2 class="text-xs font-bold text-studio-accent uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-calculator"></i> 6. Cuadro Económico
+                    </h2>
+                    <button onclick="addItem()" class="px-2.5 py-1 text-[11px] font-medium bg-studio-accent hover:bg-studio-accentHover text-white rounded transition flex items-center gap-1">
+                        <i class="fa-solid fa-plus text-xs"></i> Agregar Ítem
+                    </button>
+                </div>
+
+                <div id="itemsContainer" class="space-y-3">
+                    <!-- Filas dinámicas se insertan mediante JS -->
+                </div>
+
+                <!-- Configuración de IGV e Impuestos -->
+                <div class="mt-4 pt-3 border-t border-zinc-800 flex items-center justify-between text-xs">
+                    <span class="text-zinc-400">¿Precios con IGV (18%)?</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="includeIgv" checked onchange="updatePreview()" class="sr-only peer">
+                        <div class="w-9 h-5 bg-zinc-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-studio-accent"></div>
+                    </label>
+                </div>
+            </section>
+
+            <!-- 7. Condiciones -->
+            <section class="bg-zinc-900/50 p-4 rounded-xl border border-zinc-800/80">
+                <h2 class="text-xs font-bold text-studio-accent uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-scale-balanced"></i> 7. Condiciones y Métodos
+                </h2>
+                <div class="grid grid-cols-2 gap-3 mb-3">
+                    <div>
+                        <label class="block text-[11px] font-medium text-zinc-400 mb-1">Adelanto (%)</label>
+                        <input type="number" id="payAdvance" value="50" oninput="updatePreview()" class="w-full bg-zinc-800 border border-zinc-700 rounded-md px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-studio-accent">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-medium text-zinc-400 mb-1">Costo Hora Extra (S/.)</label>
+                        <input type="number" id="extraHourCost" value="250" oninput="updatePreview()" class="w-full bg-zinc-800 border border-zinc-700 rounded-md px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-studio-accent">
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Footer / Action Buttons -->
+        <div class="p-4 border-t border-zinc-800 bg-zinc-950/80 backdrop-blur flex gap-3">
+            <button onclick="window.print()" class="flex-1 py-2.5 px-4 bg-studio-accent hover:bg-studio-accentHover text-white font-semibold text-xs rounded-lg transition shadow-lg shadow-rose-950/30 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-print"></i> Guardar / Imprimir PDF
+            </button>
+        </div>
+    </aside>
+
+    <!-- VISTA PREVIA A4 (DERECHA) -->
+    <main class="flex-1 p-4 lg:p-8 overflow-y-auto print-container flex justify-center bg-zinc-950">
+        
+        <!-- Hoja A4 -->
+        <div id="quotationSheet" class="a4-page p-8 md:p-12 flex flex-col justify-between text-zinc-800 text-xs leading-relaxed font-sans">
+            
+            <div>
+                <!-- ENCABEZADO Y BRANDING ORIGINAL -->
+                <header class="flex justify-between items-start border-b-2 border-zinc-900 pb-5 mb-6">
+                    <div class="flex flex-col items-start">
+                        <!-- LOGO REVERTIDO A PRIMERA VERSIÓN -->
+                        <div class="flex items-center gap-2 mb-1">
+                            <img style="height:50px" src="https://www.richardavila.pe/cotizar/222%20Studios%20(A4).png" alt="">
+                        </div>
+                        <p class="text-[10px] text-zinc-500 font-medium tracking-widest uppercase">Comunicación que inspira y conecta</p>
+                        <p class="text-[9px] text-zinc-400 mt-0.5">RUC: 20611917661 | 222 Studios S.A.C.</p>
+                    </div>
+
+                    <div class="text-right">
+                        <div class="inline-block bg-zinc-900 text-white font-bold text-xs uppercase px-3 py-1 rounded">
+                            PROFORMA DE SERVICIOS
+                        </div>
+                        <p class="font-mono text-sm font-bold text-zinc-900 mt-2" id="prevDocNum">PRO-2026-084</p>
+                        <p class="text-[10px] text-zinc-500 mt-0.5">Fecha: <span id="prevDocDate" class="font-medium text-zinc-800">05/08/2026</span></p>
+                        <p class="text-[10px] text-zinc-500">Validez: <span id="prevDocValidity" class="font-medium text-zinc-800">15 días</span></p>
+                    </div>
+                </header>
+
+                <!-- DATOS DE CLIENTE Y PROYECTO -->
+                <div class="grid grid-cols-2 gap-6 bg-zinc-50 p-4 rounded-lg border border-zinc-200/80 mb-6">
+                    <div>
+                        <h3 class="text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-1.5">Información del Cliente</h3>
+                        <p class="font-bold text-sm text-zinc-900" id="prevClientCompany">Universidad Católica San Pablo</p>
+                        <p class="text-zinc-600 mt-0.5">RUC: <span id="prevClientRuc" class="font-mono">20148332127</span></p>
+                        <p class="text-zinc-600">Atención: <span id="prevClientContact" class="font-semibold text-zinc-800">Estefanny Ayres</span></p>
+                    </div>
+                    <div class="border-l border-zinc-200 pl-6">
+                        <h3 class="text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-1.5">Detalles del Evento</h3>
+                        <p class="font-bold text-sm text-zinc-900" id="prevEventName">CADE Educación 2026 (UCSP)</p>
+                        <p class="text-zinc-600 mt-0.5"><i class="fa-solid fa-location-dot text-zinc-400 mr-1"></i> <span id="prevEventLocation">Lima, Perú</span></p>
+                        <p class="text-zinc-600 mt-1 whitespace-pre-line text-[10.5px] leading-snug" id="prevEventSchedule">Cobertura: 08 hrs.</p>
+                    </div>
+                </div>
+
+                <!-- TALENTO HUMANO & PLAN -->
+                <div class="grid grid-cols-2 gap-6 mb-6">
+                    <div class="border border-zinc-200 rounded-lg p-3.5">
+                        <h4 class="font-bold text-zinc-900 text-xs mb-2 flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-rose-600"></span> Talento Humano Asignado
+                        </h4>
+                        <div id="prevTeam" class="text-zinc-700 text-[11px] space-y-1">
+                            <!-- Populated JS -->
+                        </div>
+                    </div>
+
+                    <div class="border border-zinc-200 rounded-lg p-3.5">
+                        <h4 class="font-bold text-zinc-900 text-xs mb-2 flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-rose-600"></span> Plazos de Entrega
+                        </h4>
+                        <p class="text-zinc-700 text-[11px]">Fotografías: <strong id="prevDaysPhotos" class="text-zinc-900">02</strong> días hábiles</p>
+                        <p class="text-zinc-700 text-[11px]">Video Final: <strong id="prevDaysVideo" class="text-zinc-900">07</strong> días hábiles</p>
+                    </div>
+                </div>
+
+                <!-- ALCANCE DEL SERVICIO -->
+                <div class="mb-6 space-y-2">
+                    <h4 class="font-bold text-zinc-900 text-xs uppercase tracking-wider text-[10px] text-zinc-500 border-b border-zinc-200 pb-1">
+                        Plan de Documentación y Entregables
+                    </h4>
+                    <div class="grid grid-cols-2 gap-4 text-[11px] text-zinc-700">
+                        <div>
+                            <p class="font-semibold text-zinc-900 mb-0.5">Producción & Registro:</p>
+                            <p id="prevPlanProd" class="text-zinc-600 leading-normal">---</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-zinc-900 mb-0.5">Postproducción & Edición:</p>
+                            <p id="prevPlanPost" class="text-zinc-600 leading-normal">---</p>
+                        </div>
+                    </div>
+                    <div class="mt-2 bg-zinc-50 p-2.5 rounded border border-zinc-100">
+                        <p class="font-semibold text-zinc-900 text-[10.5px] mb-0.5">Entregables Acordados:</p>
+                        <p id="prevDeliverables" class="text-zinc-600 text-[10.5px] whitespace-pre-line leading-relaxed">---</p>
+                    </div>
+                </div>
+
+                <!-- TABLA DE PRECIOS E INVERSIÓN -->
+                <div class="mb-6">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-zinc-900 text-white text-[10px] uppercase tracking-wider font-semibold">
+                                <th class="py-2 px-3 rounded-l">Descripción del Servicio / Paquete</th>
+                                <th class="py-2 px-3 text-center w-20">Cant.</th>
+                                <th class="py-2 px-3 text-right w-28">P. Unit.</th>
+                                <th class="py-2 px-3 text-right w-28 rounded-r">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="prevItemsTable" class="divide-y divide-zinc-200 text-[11px]">
+                            <!-- Inserted by JS -->
+                        </tbody>
+                    </table>
+
+                    <!-- Totales -->
+                    <div class="flex justify-end mt-3">
+                        <div class="w-56 space-y-1.5 text-[11px]">
+                            <div class="flex justify-between text-zinc-600">
+                                <span>Subtotal:</span>
+                                <span class="font-mono font-medium text-zinc-800" id="prevSubtotal">S/. 0.00</span>
+                            </div>
+                            <div class="flex justify-between text-zinc-600" id="igvRow">
+                                <span>IGV (18%):</span>
+                                <span class="font-mono font-medium text-zinc-800" id="prevIgv">S/. 0.00</span>
+                            </div>
+                            <div class="flex justify-between pt-1.5 border-t-2 border-zinc-900 text-sm font-bold text-zinc-950">
+                                <span>Inversión Total:</span>
+                                <span class="font-mono" id="prevTotal">S/. 0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TÉRMINOS Y DATOS BANCARIOS -->
+                <div class="grid grid-cols-2 gap-6 pt-4 border-t border-zinc-200">
+                    <div class="space-y-1.5 text-[10px] text-zinc-600">
+                        <h5 class="font-bold text-zinc-900 text-[10.5px] uppercase tracking-wider">Términos Comerciales</h5>
+                        <p>• Pago: <strong class="text-zinc-800" id="prevAdvanceText">50%</strong> para inicio de proyecto y el <strong class="text-zinc-800" id="prevPendingText">50%</strong> contra entrega final de video aprobado.</p>
+                        <p>• Requerida firma de contrato y reunión previa de coordinaciones.</p>
+                        <p>• Hora extra por profesional: <span id="prevExtraHour" class="font-semibold text-zinc-800">S/. 250.00</span> + IGV.</p>
+                    </div>
+
+                    <div class="bg-zinc-50 p-3 rounded border border-zinc-200 text-[10px]">
+                        <h5 class="font-bold text-zinc-900 text-[10.5px] uppercase tracking-wider mb-1">Cuentas Bancarias para Depósito</h5>
+                        <p class="font-semibold text-zinc-800">222 STUDIOS S.A.C. | Interbank Empresas</p>
+                        <p class="mt-0.5"><span class="text-zinc-500">Soles Cta:</span> <span class="font-mono text-zinc-800">200-3006101702</span></p>
+                        <p><span class="text-zinc-500">CCI Soles:</span> <span class="font-mono text-zinc-800">003-200-003006101702-33</span></p>
+                        <p class="mt-0.5"><span class="text-zinc-500">Dólares Cta:</span> <span class="font-mono text-zinc-800">200-3006101710</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER / FIRMA -->
+            <footer class="mt-8 pt-6 border-t border-zinc-200 flex justify-between items-end">
+                <div class="text-[9px] text-zinc-400">
+                    <p class="font-medium text-zinc-600">222 Studios S.A.C.</p>
+                    <p>contacto@222studios.com | Lima, Perú</p>
+                </div>
+                
+                <div class="text-center w-52 border-t border-dashed border-zinc-400 pt-2">
+                    <p class="font-bold text-zinc-800 text-[11px]">Conformidad del Cliente</p>
+                    <p class="text-[9px] text-zinc-400">Firma, Nombre y Sello de Aceptación</p>
+                </div>
+            </footer>
+
+        </div>
+    </main>
+
+    <!-- LOGIC / JAVASCRIPT -->
+    <script>
+        // Logo por defecto en SVG con la tipografía e identidad oficial de 222 Studios (azul oscuro + punto rojo + por Richard Avila)
+        const OFFICIAL_LOGO_BASE64 = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 570 270" width="570" height="270"><g fill="%231a234a"><path d="M12.8 126.3c15-18.7 33.3-33 51-46 17.7-13.3 35.8-24.8 53-38.3 12.3-9.7 20-22 20-37.8 0-18-13.8-28.5-32-28.5-19.3 0-33.8 11.8-37.3 30.5H0C3.8 23.3 22.3 0 65.5 0c42.5 0 74.5 22.3 74.5 61.3 0 31.5-16.5 52.8-37 68-17.8 13.3-36.5 24.8-54 38.3-11.8 9-18.5 20.3-19.8 33.8h112.8v39.3H0c0-44 22-83.3 12.8-114.7zM196.8 126.3c15-18.7 33.3-33 51-46 17.7-13.3 35.8-24.8 53-38.3 12.3-9.7 20-22 20-37.8 0-18-13.8-28.5-32-28.5-19.3 0-33.8 11.8-37.3 30.5H184c3.8-17.2 22.3-40.5 65.5-40.5 42.5 0 74.5 22.3 74.5 61.3 0 31.5-16.5 52.8-37 68-17.8 13.3-36.5 24.8-54 38.3-11.8 9-18.5 20.3-19.8 33.8h112.8v39.3H184c0-44 22-83.3 12.8-114.7zM380.8 126.3c15-18.7 33.3-33 51-46 17.7-13.3 35.8-24.8 53-38.3 12.3-9.7 20-22 20-37.8 0-18-13.8-28.5-32-28.5-19.3 0-33.8 11.8-37.3 30.5H368c3.8-17.2 22.3-40.5 65.5-40.5 42.5 0 74.5 22.3 74.5 61.3 0 31.5-16.5 52.8-37 68-17.8 13.3-36.5 24.8-54 38.3-11.8 9-18.5 20.3-19.8 33.8h112.8v39.3H368c0-44 22-83.3 12.8-114.7z"/><text x="0" y="222" font-family="'Plus Jakarta Sans', 'Inter', sans-serif" font-weight="800" font-size="92" letter-spacing="-2">studios</text></g><circle cx="538" cy="214" r="14" fill="%23c83244"/><text x="245" y="260" font-family="'Inter', sans-serif" font-weight="400" font-size="28" fill="%231a234a" letter-spacing="1">por Richard Avila</text></svg>`;
+
+        // Array global de ítems
+        let items = [
+            { description: "Cobertura Audiovisual (Vídeo Trailer 2 min + Storytelling)", quantity: 1, unitPrice: 3500 },
+            { description: "Cobertura Fotográfica Profesional (Fotos ilimitadas + Edición)", quantity: 1, unitPrice: 2500 }
+        ];
+
+        // Cargar datos guardados en localStorage si existen
+        function loadSavedState() {
+            const saved = localStorage.getItem('222_quotation_data');
+            if (saved) {
+                try {
+                    const data = JSON.parse(saved);
+                    document.getElementById('logoUrl').value = data.logoUrl || OFFICIAL_LOGO_BASE64;
+                    document.getElementById('docNum').value = data.docNum || 'PRO-2026-084';
+                    document.getElementById('docDate').value = data.docDate || '';
+                    document.getElementById('docValidity').value = data.docValidity || '15';
+                    document.getElementById('clientCompany').value = data.clientCompany || '';
+                    document.getElementById('clientRuc').value = data.clientRuc || '';
+                    document.getElementById('clientContact').value = data.clientContact || '';
+                    document.getElementById('eventName').value = data.eventName || '';
+                    document.getElementById('eventLocation').value = data.eventLocation || '';
+                    document.getElementById('eventSchedule').value = data.eventSchedule || '';
+                    document.getElementById('teamMembers').value = data.teamMembers || '';
+                    document.getElementById('planProd').value = data.planProd || '';
+                    document.getElementById('planPost').value = data.planPost || '';
+                    document.getElementById('daysPhotos').value = data.daysPhotos || '2';
+                    document.getElementById('daysVideo').value = data.daysVideo || '7';
+                    document.getElementById('deliverablesText').value = data.deliverablesText || '';
+                    document.getElementById('payAdvance').value = data.payAdvance || '50';
+                    document.getElementById('extraHourCost').value = data.extraHourCost || '250';
+                    document.getElementById('includeIgv').checked = data.includeIgv !== undefined ? data.includeIgv : true;
+                    if(data.items && data.items.length) items = data.items;
+                } catch(e) {
+                    console.error("Error al cargar estado guardado", e);
+                }
+            } else {
+                document.getElementById('logoUrl').value = OFFICIAL_LOGO_BASE64;
+                document.getElementById('docDate').valueAsDate = new Date();
+            }
+        }
+
+        function saveState() {
+            const data = {
+                logoUrl: document.getElementById('logoUrl').value,
+                docNum: document.getElementById('docNum').value,
+                docDate: document.getElementById('docDate').value,
+                docValidity: document.getElementById('docValidity').value,
+                clientCompany: document.getElementById('clientCompany').value,
+                clientRuc: document.getElementById('clientRuc').value,
+                clientContact: document.getElementById('clientContact').value,
+                eventName: document.getElementById('eventName').value,
+                eventLocation: document.getElementById('eventLocation').value,
+                eventSchedule: document.getElementById('eventSchedule').value,
+                teamMembers: document.getElementById('teamMembers').value,
+                planProd: document.getElementById('planProd').value,
+                planPost: document.getElementById('planPost').value,
+                daysPhotos: document.getElementById('daysPhotos').value,
+                daysVideo: document.getElementById('daysVideo').value,
+                deliverablesText: document.getElementById('deliverablesText').value,
+                payAdvance: document.getElementById('payAdvance').value,
+                extraHourCost: document.getElementById('extraHourCost').value,
+                includeIgv: document.getElementById('includeIgv').checked,
+                items: items
+            };
+            localStorage.setItem('222_quotation_data', JSON.stringify(data));
+        }
+
+        // Renderizar la lista de items en el formulario
+        function renderItemsForm() {
+            const container = document.getElementById('itemsContainer');
+            container.innerHTML = '';
+
+            items.forEach((item, index) => {
+                const itemEl = document.createElement('div');
+                itemEl.className = 'p-3 bg-zinc-800/60 rounded-lg border border-zinc-700/60 space-y-2';
+                itemEl.innerHTML = `
+                    <div class="flex justify-between items-center gap-2">
+                        <input type="text" value="${item.description}" oninput="updateItem(${index}, 'description', this.value)" placeholder="Descripción del servicio" class="w-full bg-zinc-900 border border-zinc-700 rounded px-2 py-1 text-xs text-white focus:outline-none focus:border-studio-accent">
+                        <button onclick="removeItem(${index})" class="text-zinc-400 hover:text-rose-400 p-1 transition"><i class="fa-solid fa-trash-can text-xs"></i></button>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="text-[10px] text-zinc-400 block">Cant.</label>
+                            <input type="number" min="1" value="${item.quantity}" oninput="updateItem(${index}, 'quantity', this.value)" class="w-full bg-zinc-900 border border-zinc-700 rounded px-2 py-1 text-xs text-white focus:outline-none focus:border-studio-accent">
+                        </div>
+                        <div>
+                            <label class="text-[10px] text-zinc-400 block">Precio Unit. (S/.)</label>
+                            <input type="number" step="50" value="${item.unitPrice}" oninput="updateItem(${index}, 'unitPrice', this.value)" class="w-full bg-zinc-900 border border-zinc-700 rounded px-2 py-1 text-xs text-white focus:outline-none focus:border-studio-accent">
+                        </div>
+                    </div>
+                `;
+                container.appendChild(itemEl);
+            });
+
+            updatePreview();
+        }
+
+        function addItem() {
+            items.push({ description: "Nuevo Servicio Audiovisual", quantity: 1, unitPrice: 1000 });
+            renderItemsForm();
+        }
+
+        function removeItem(index) {
+            if(items.length > 1) {
+                items.splice(index, 1);
+                renderItemsForm();
+            }
+        }
+
+        function updateItem(index, key, value) {
+            if(key === 'quantity' || key === 'unitPrice') {
+                items[index][key] = parseFloat(value) || 0;
+            } else {
+                items[index][key] = value;
+            }
+            updatePreview();
+        }
+
+        function formatDate(dateStr) {
+            if(!dateStr) return '';
+            const parts = dateStr.split('-');
+            if(parts.length === 3) return `${parts[2]}/${parts[1]}/${parts[0]}`;
+            return dateStr;
+        }
+
+        // Actualización en tiempo real de la Vista Previa
+        function updatePreview() {
+            // Textos Simples
+            document.getElementById('prevDocNum').innerText = document.getElementById('docNum').value || 'PRO-2026-000';
+            document.getElementById('prevDocDate').innerText = formatDate(document.getElementById('docDate').value);
+            document.getElementById('prevDocValidity').innerText = (document.getElementById('docValidity').value || '15') + ' días';
+
+            document.getElementById('prevClientCompany').innerText = document.getElementById('clientCompany').value || '---';
+            document.getElementById('prevClientRuc').innerText = document.getElementById('clientRuc').value || '---';
+            document.getElementById('prevClientContact').innerText = document.getElementById('clientContact').value || '---';
+
+            document.getElementById('prevEventName').innerText = document.getElementById('eventName').value || '---';
+            document.getElementById('prevEventLocation').innerText = document.getElementById('eventLocation').value || '---';
+            document.getElementById('prevEventSchedule').innerText = document.getElementById('eventSchedule').value || '---';
+
+            // Equipo Humano
+            const teamInput = document.getElementById('teamMembers').value;
+            const teamContainer = document.getElementById('prevTeam');
+            teamContainer.innerHTML = '';
+            if(teamInput) {
+                teamInput.split(',').forEach(member => {
+                    if(member.trim()) {
+                        teamContainer.innerHTML += `<p>• ${member.trim()}</p>`;
+                    }
+                });
+            }
+
+            // Plazos y Plan
+            document.getElementById('prevDaysPhotos').innerText = document.getElementById('daysPhotos').value || '0';
+            document.getElementById('prevDaysVideo').innerText = document.getElementById('daysVideo').value || '0';
+            document.getElementById('prevPlanProd').innerText = document.getElementById('planProd').value || '---';
+            document.getElementById('prevPlanPost').innerText = document.getElementById('planPost').value || '---';
+            document.getElementById('prevDeliverables').innerText = document.getElementById('deliverablesText').value || '---';
+
+            // Condiciones
+            const advance = document.getElementById('payAdvance').value || 50;
+            document.getElementById('prevAdvanceText').innerText = advance + '%';
+            document.getElementById('prevPendingText').innerText = (100 - advance) + '%';
+            document.getElementById('prevExtraHour').innerText = 'S/. ' + parseFloat(document.getElementById('extraHourCost').value || 0).toFixed(2);
+
+            // Tabla de Precios y Cálculos
+            const tableBody = document.getElementById('prevItemsTable');
+            tableBody.innerHTML = '';
+
+            let subtotal = 0;
+
+            items.forEach(item => {
+                const itemTotal = item.quantity * item.unitPrice;
+                subtotal += itemTotal;
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-zinc-50';
+                tr.innerHTML = `
+                    <td class="py-2 px-3 font-medium text-zinc-900">${item.description}</td>
+                    <td class="py-2 px-3 text-center text-zinc-600">${item.quantity}</td>
+                    <td class="py-2 px-3 text-right font-mono text-zinc-700">S/. ${item.unitPrice.toFixed(2)}</td>
+                    <td class="py-2 px-3 text-right font-mono font-semibold text-zinc-900">S/. ${itemTotal.toFixed(2)}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+
+            const includeIgv = document.getElementById('includeIgv').checked;
+            let igv = 0;
+            let total = subtotal;
+
+            if (includeIgv) {
+                igv = subtotal * 0.18;
+                total = subtotal + igv;
+                document.getElementById('igvRow').style.display = 'flex';
+            } else {
+                document.getElementById('igvRow').style.display = 'none';
+            }
+
+            document.getElementById('prevSubtotal').innerText = `S/. ${subtotal.toFixed(2)}`;
+            document.getElementById('prevIgv').innerText = `S/. ${igv.toFixed(2)}`;
+            document.getElementById('prevTotal').innerText = `S/. ${total.toFixed(2)}`;
+
+            saveState();
+        }
+
+        // Cargar datos de ejemplo (CADE Educación)
+        function loadSampleData() {
+            document.getElementById('logoUrl').value = OFFICIAL_LOGO_BASE64;
+            document.getElementById('docNum').value = 'PRO-2026-084';
+            document.getElementById('docValidity').value = '15';
+            document.getElementById('clientCompany').value = 'Universidad Católica San Pablo';
+            document.getElementById('clientRuc').value = '20148332127';
+            document.getElementById('clientContact').value = 'Estefanny Ayres';
+            
+            document.getElementById('eventName').value = 'CADE Educación 2026 (UCSP)';
+            document.getElementById('eventLocation').value = 'Lima, Perú';
+            document.getElementById('eventSchedule').value = 'Miércoles 12 de 16:30 a 20:30 hrs.\nJueves 13 de 16:00 a 20:00 hrs. (08h total)';
+            
+            document.getElementById('teamMembers').value = '01 Fotógrafo profesional, 01 Filmmaker principal';
+            document.getElementById('planProd').value = 'Documentación de la delegación y realización de 04 testimoniales de participantes (01 CADE + 03 delegación).';
+            document.getElementById('planPost').value = 'Edición basada en registro documentado, musicalización comercial, corrección de color, efectos, transiciones e identidad de marca.';
+            
+            document.getElementById('daysPhotos').value = '2';
+            document.getElementById('daysVideo').value = '7';
+            document.getElementById('deliverablesText').value = '• Galería completa de fotografías + selección editada en alta resolución.\n• 01 Video Trailer/Recap (2 min aprox.) en formato horizontal con storytelling y 4 testimonios.\n• Incluye hasta 2 rondas de revisiones.';
+
+            items = [
+                { description: "Servicio de Producción y Postproducción de Vídeo (Trailer 2 min + Testimoniales)", quantity: 1, unitPrice: 3500 },
+                { description: "Servicio de Fotografía Profesional para Evento Corporativo", quantity: 1, unitPrice: 2500 }
+            ];
+
+            renderItemsForm();
+        }
+
+        // Inicializar
+        window.onload = function() {
+            loadSavedState();
+            renderItemsForm();
+        }
+    </script>
+</body>
+</html>
