@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cotización - Foto LinkedIn PE</title>
+    <title>Cotización - Richard Avila</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -16,12 +16,13 @@
                 extend: {
                     colors: {
                         brand: {
-                            red: '#a23e49',
-                            redHover: '#8b353e',
-                            navy: 'rgb(41, 49, 78)', 
-                            dark: '#f8f9fa',
-                            card: '#ffffff',
-                            border: '#dee2e6'
+                            // Colores para tema claro (blanco/gris)
+                            dark: '#ffffff',     // Fondo principal
+                            card: '#f8f9fa',     // Fondo del contenedor
+                            border: '#dee2e6',   // Bordes
+                            textPrimary: '#212529', // Texto principal
+                            textSecondary: '#6c757d', // Texto secundario
+                            textAccent: '#495057' // Acentos/iconos
                         }
                     },
                     fontFamily: {
@@ -34,9 +35,11 @@
     </script>
     <style>
         body {
-            color: #212529; 
+            color: #212529;
+            background-color: #ffffff;
         }
         
+        /* Ajustes para forzar modo claro en inputs */
         input[type="text"], input[type="tel"], input[type="email"], input[type="url"], input[type="date"], select, textarea {
             color: #212529 !important;
             background-color: #ffffff !important;
@@ -46,32 +49,44 @@
             color: #6c757d !important;
         }
 
-        .text-zinc-400 {
-            color: #6c757d !important; 
-        }
-
-        .text-zinc-200 {
-            color: #343a40 !important;
+        .text-zinc-400, .text-zinc-200 {
+            color: #495057 !important;
         }
         
+        .text-white, .text-zinc-100, .text-zinc-300 {
+            color: #ffffff !important;
+        }
+        
+        .text-brand-red {
+            color: #6c757d !important; /* Acentos en gris */
+        }
+
+        .bg-brand-red {
+             background-color: #343a40 !important; /* Botón principal gris oscuro */
+        }
+        .hover\:bg-brand-redHover:hover {
+             background-color: #212529 !important;
+        }
+
+        /* Ocultar resplandor del tema oscuro */
         .bg-gradient-to-b {
             display: none;
         }
     </style>
 </head>
-<body class="bg-brand-dark text-zinc-900 font-sans min-h-screen py-10 px-4 flex flex-col justify-center items-center relative overflow-x-hidden selection:bg-brand-red selection:text-white">
+<body class="font-sans min-h-screen py-10 px-4 flex flex-col justify-center items-center relative overflow-x-hidden selection:bg-gray-200 selection:text-black">
 
-    <div class="w-full max-w-3xl bg-brand-card/90 backdrop-blur-xl border border-brand-border rounded-2xl shadow-lg p-6 sm:p-10 my-auto">
+    <div class="w-full max-w-3xl bg-brand-card border border-brand-border rounded-2xl shadow-sm p-6 sm:p-10 my-auto">
         
         <!-- HEADER CORPORATIVO -->
         <header class="text-center pb-8 border-b border-brand-border mb-8">
-            <!-- Bloque de imagen reemplazado -->
+            
             <div class="flex justify-center mb-4">
                 <img src="./222 Studios (A4).png" alt="Foto LinkedIn PE por Richard Avila" class="h-16 md:h-20 object-contain">
             </div>
             
-            <h2 class="text-xl sm:text-2xl font-montserrat font-bold text-gray-800 mt-4">Cuéntanos un poco sobre ti y tu proyecto</h2>
-            <p class="text-xs sm:text-sm text-gray-600 mt-1 max-w-xl mx-auto">
+            <h2 class="text-xl sm:text-2xl font-montserrat font-bold mt-4">Cuéntanos un poco sobre ti y tu proyecto</h2>
+            <p class="text-xs sm:text-sm text-brand-textSecondary mt-1 max-w-xl mx-auto">
                 Completa este breve cuestionario para enviarte una propuesta exacta a tu medida.
             </p>
         </header>
@@ -81,160 +96,211 @@
 
             <!-- SECCIÓN 1: DATOS PERSONALES Y CONTACTO -->
             <div class="space-y-4">
-                <label class="block text-xs font-bold uppercase tracking-wider text-brand-navy flex items-center gap-2">
+                <label class="block text-xs font-bold uppercase tracking-wider text-brand-textAccent flex items-center gap-2">
                     <i class="fa-solid fa-address-card"></i> 1. Datos de Contacto
                 </label>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div class="sm:col-span-2">
-                        <label class="block text-xs text-zinc-400 mb-1">Nombre Completo <span class="text-brand-red">*</span></label>
-                        <input type="text" id="fullName" required placeholder="Ej. Richard Avila" class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:border-brand-navy transition">
+                        <label class="block text-xs font-medium mb-1">Nombre Completo *</label>
+                        <input type="text" id="fullName" required placeholder="Ej. Richard Avila" class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:ring-1 focus:ring-gray-400 transition">
                     </div>
 
                     <div>
-                        <label class="block text-xs text-zinc-400 mb-1">Teléfono / WhatsApp <span class="text-brand-red">*</span></label>
-                        <input type="tel" id="phoneNumber" required placeholder="+51 941 660 544" class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:border-brand-navy transition">
+                        <label class="block text-xs font-medium mb-1">Teléfono / WhatsApp *</label>
+                        <input type="tel" id="phoneNumber" required placeholder="+51 941 660 544" class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:ring-1 focus:ring-gray-400 transition">
                     </div>
 
                     <div>
-                        <label class="block text-xs text-zinc-400 mb-1">Correo Electrónico <span class="text-brand-red">*</span></label>
-                        <input type="email" id="emailAddress" required placeholder="correo@ejemplo.com" class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:border-brand-navy transition">
+                        <label class="block text-xs font-medium mb-1">Correo Electrónico *</label>
+                        <input type="email" id="emailAddress" required placeholder="222studios@richardavila.pe" class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:ring-1 focus:ring-gray-400 transition">
                     </div>
                 </div>
             </div>
 
             <!-- SECCIÓN 2: SELECCIÓN DE PERFIL Y CAMPOS ADAPTATIVOS -->
             <div class="space-y-4 pt-4 border-t border-brand-border">
-                <label class="block text-xs font-bold uppercase tracking-wider text-brand-navy flex items-center gap-2">
+                <label class="block text-xs font-bold uppercase tracking-wider text-brand-textAccent flex items-center gap-2">
                     <i class="fa-solid fa-user-gear"></i> 2. ¿En representación de qué perfil nos contactas?
                 </label>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <label class="relative flex items-center p-3.5 bg-gray-50 border border-brand-border rounded-xl cursor-pointer hover:border-brand-navy/50 transition group">
-                        <input type="radio" name="clientProfile" value="Empresa" onchange="toggleProfileFieldsV2()" checked class="accent-brand-navy w-4 h-4">
+                    <label class="relative flex items-center p-3.5 bg-white border border-brand-border rounded-xl cursor-pointer hover:border-gray-400 transition group">
+                        <input type="radio" name="clientProfile" value="Empresa" onchange="toggleProfileFieldsV2()" checked class="accent-gray-600 w-4 h-4">
                         <span class="ml-3 text-xs sm:text-sm font-semibold text-gray-700">Empresa / Institución</span>
                     </label>
 
-                    <label class="relative flex items-center p-3.5 bg-gray-50 border border-brand-border rounded-xl cursor-pointer hover:border-brand-navy/50 transition group">
-                        <input type="radio" name="clientProfile" value="Marca Personal" onchange="toggleProfileFieldsV2()" class="accent-brand-navy w-4 h-4">
+                    <label class="relative flex items-center p-3.5 bg-white border border-brand-border rounded-xl cursor-pointer hover:border-gray-400 transition group">
+                        <input type="radio" name="clientProfile" value="Marca Personal" onchange="toggleProfileFieldsV2()" class="accent-gray-600 w-4 h-4">
                         <span class="ml-3 text-xs sm:text-sm font-semibold text-gray-700">Marca Personal</span>
                     </label>
 
-                    <label class="relative flex items-center p-3.5 bg-gray-50 border border-brand-border rounded-xl cursor-pointer hover:border-brand-navy/50 transition group">
-                        <input type="radio" name="clientProfile" value="Emprendedor / Startup" onchange="toggleProfileFieldsV2()" class="accent-brand-navy w-4 h-4">
+                    <label class="relative flex items-center p-3.5 bg-white border border-brand-border rounded-xl cursor-pointer hover:border-gray-400 transition group">
+                        <input type="radio" name="clientProfile" value="Emprendedor / Startup" onchange="toggleProfileFieldsV2()" class="accent-gray-600 w-4 h-4">
                         <span class="ml-3 text-xs sm:text-sm font-semibold text-gray-700">Emprendedor / Startup</span>
                     </label>
 
-                    <label class="relative flex items-center p-3.5 bg-gray-50 border border-brand-border rounded-xl cursor-pointer hover:border-brand-navy/50 transition group">
-                        <input type="radio" name="clientProfile" value="Profesional Independiente" onchange="toggleProfileFieldsV2()" class="accent-brand-navy w-4 h-4">
+                    <label class="relative flex items-center p-3.5 bg-white border border-brand-border rounded-xl cursor-pointer hover:border-gray-400 transition group">
+                        <input type="radio" name="clientProfile" value="Profesional Independiente" onchange="toggleProfileFieldsV2()" class="accent-gray-600 w-4 h-4">
                         <span class="ml-3 text-xs sm:text-sm font-semibold text-gray-700">Profesional Independiente</span>
                     </label>
                 </div>
 
                 <!-- BLOQUE 1: EMPRESA O STARTUP -->
-                <div id="corporateFieldsBlock" class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-3 bg-gray-50 p-4 rounded-xl border border-brand-border/60">
+                <div id="corporateFieldsBlock" class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-3 bg-white p-4 rounded-xl border border-brand-border">
                     <div>
-                        <label class="block text-xs text-zinc-400 mb-1">Nombre de la Empresa</label>
-                        <input type="text" id="companyName" placeholder="Ej. TEDx Lima" class="w-full border border-brand-border rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-brand-navy">
+                        <label class="block text-xs font-medium mb-1">Nombre de la Empresa</label>
+                        <input type="text" id="companyName" placeholder="Ej. TEDx Lima" class="w-full border border-brand-border rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-gray-400">
                     </div>
                     <div>
-                        <label class="block text-xs text-zinc-400 mb-1">Área / Departamento</label>
-                        <input type="text" id="companyArea" placeholder="Ej. Marketing / Logística" class="w-full border border-brand-border rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-brand-navy">
+                        <label class="block text-xs font-medium mb-1">Área / Departamento</label>
+                        <input type="text" id="companyArea" placeholder="Ej. Marketing / Logística" class="w-full border border-brand-border rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-gray-400">
                     </div>
                     <div>
-                        <label class="block text-xs text-zinc-400 mb-1">Puesto / Cargo</label>
-                        <input type="text" id="companyRole" placeholder="Ej. Jefa / Coordinadora" class="w-full border border-brand-border rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-brand-navy">
+                        <label class="block text-xs font-medium mb-1">Puesto / Cargo</label>
+                        <input type="text" id="companyRole" placeholder="Ej. Jefa / Coordinadora" class="w-full border border-brand-border rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-gray-400">
                     </div>
                 </div>
 
                 <!-- BLOQUE 2: MARCA PERSONAL -->
-                <div id="personalBrandBlock" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 bg-gray-50 p-4 rounded-xl border border-brand-border/60">
+                <div id="personalBrandBlock" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 bg-white p-4 rounded-xl border border-brand-border">
                     <div>
-                        <label class="block text-xs text-zinc-400 mb-1">Rubro / Nicho de Contenido</label>
-                        <input type="text" id="brandNiche" placeholder="Ej. Fitness, Finanzas, Moda, Tecnología" class="w-full border border-brand-border rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-brand-navy">
+                        <label class="block text-xs font-medium mb-1">Rubro / Nicho de Contenido</label>
+                        <input type="text" id="brandNiche" placeholder="Ej. Fitness, Finanzas, Moda, Tecnología" class="w-full border border-brand-border rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-gray-400">
                     </div>
                     <div>
-                        <label class="block text-xs text-zinc-400 mb-1">Red Principal / Canal</label>
-                        <input type="text" id="socialMedia" placeholder="Ej. @usuario en Instagram / YouTube" class="w-full border border-brand-border rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-brand-navy">
+                        <label class="block text-xs font-medium mb-1">Red Principal / Canal</label>
+                        <input type="text" id="socialMedia" placeholder="Ej. @usuario en Instagram / YouTube" class="w-full border border-brand-border rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-gray-400">
                     </div>
                 </div>
 
                 <!-- BLOQUE 3: PROFESIONAL INDEPENDIENTE -->
-                <div id="independentBlock" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 bg-gray-50 p-4 rounded-xl border border-brand-border/60">
+                <div id="independentBlock" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 bg-white p-4 rounded-xl border border-brand-border">
                     <div>
-                        <label class="block text-xs text-zinc-400 mb-1">Profesión / Especialidad</label>
-                        <input type="text" id="profession" placeholder="Ej. Arquitecto, Abogado, Consultor" class="w-full border border-brand-border rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-brand-navy">
+                        <label class="block text-xs font-medium mb-1">Profesión / Especialidad</label>
+                        <input type="text" id="profession" placeholder="Ej. Arquitecto, Abogado, Consultor" class="w-full border border-brand-border rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-gray-400">
                     </div>
                     <div>
-                        <label class="block text-xs text-zinc-400 mb-1">Objetivo Audiovisual Principal</label>
-                        <input type="text" id="independentGoal" placeholder="Ej. Fotos Web Personal, Reels LinkedIn" class="w-full border border-brand-border rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-brand-navy">
+                        <label class="block text-xs font-medium mb-1">Objetivo Audiovisual Principal</label>
+                        <input type="text" id="independentGoal" placeholder="Ej. Fotos Web Personal, Reels LinkedIn" class="w-full border border-brand-border rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-gray-400">
                     </div>
                 </div>
             </div>
 
             <!-- SECCIÓN 3: ESPECIFICACIONES TÉCNICAS DEL PROYECTO -->
             <div class="space-y-4 pt-4 border-t border-brand-border">
-                <label class="block text-xs font-bold uppercase tracking-wider text-brand-navy flex items-center gap-2">
-                    <i class="fa-solid fa-camera"></i> 3. Tipo de Producción
+                <label class="block text-xs font-bold uppercase tracking-wider text-brand-textAccent flex items-center gap-2">
+                    <i class="fa-solid fa-film"></i> 3. Tipo de Producción y Requerimientos
                 </label>
 
                 <!-- Categorías -->
                 <div class="space-y-2">
-                    <span class="block text-xs text-zinc-400">Servicios requeridos para el proyecto:</span>
-                    <div class="grid grid-cols-2 gap-3">
-                        <label class="flex items-center justify-center gap-2 p-3 bg-gray-50 border border-brand-border rounded-xl cursor-pointer hover:border-brand-navy/50 transition">
-                            <input type="checkbox" name="serviceCategory" value="Retrato Corporativo" checked class="accent-brand-navy w-4 h-4">
-                            <span class="text-xs font-semibold text-gray-700">Retrato Corporativo</span>
+                    <span class="block text-xs font-medium text-brand-textSecondary">Servicios requeridos para el proyecto:</span>
+                    <div class="grid grid-cols-3 gap-3">
+                        <label class="flex items-center justify-center gap-2 p-3 bg-white border border-brand-border rounded-xl cursor-pointer hover:border-gray-400 transition">
+                            <input type="checkbox" name="serviceCategory" value="Fotografía" checked class="accent-gray-600 w-4 h-4">
+                            <span class="text-xs font-semibold text-gray-700">Fotografía</span>
                         </label>
-                        <label class="flex items-center justify-center gap-2 p-3 bg-gray-50 border border-brand-border rounded-xl cursor-pointer hover:border-brand-navy/50 transition">
-                            <input type="checkbox" name="serviceCategory" value="Fotografía de Eventos" class="accent-brand-navy w-4 h-4">
-                            <span class="text-xs font-semibold text-gray-700">Fotografía de Eventos</span>
+                        <label class="flex items-center justify-center gap-2 p-3 bg-white border border-brand-border rounded-xl cursor-pointer hover:border-gray-400 transition">
+                            <input type="checkbox" name="serviceCategory" value="Vídeo" checked class="accent-gray-600 w-4 h-4">
+                            <span class="text-xs font-semibold text-gray-700">Vídeo</span>
+                        </label>
+                        <label class="flex items-center justify-center gap-2 p-3 bg-white border border-brand-border rounded-xl cursor-pointer hover:border-gray-400 transition">
+                            <input type="checkbox" name="serviceCategory" value="Drone" class="accent-gray-600 w-4 h-4">
+                            <span class="text-xs font-semibold text-gray-700">Dron (Aéreo)</span>
                         </label>
                     </div>
                 </div>
 
                 <!-- Modalidad -->
                 <div class="space-y-2.5 pt-2">
-                    <span class="block text-xs text-zinc-400">Modalidad específica del servicio:</span>
+                    <span class="block text-xs font-medium text-brand-textSecondary">Modalidad específica del servicio:</span>
                     
-                    <label class="flex items-start p-3 bg-gray-50 border border-brand-border rounded-xl cursor-pointer hover:border-brand-navy/50 transition">
-                        <input type="radio" name="projectType" value="Estudio Fotográfico" checked class="accent-brand-navy w-4 h-4 mt-0.5">
+                    <label class="flex items-start p-3 bg-white border border-brand-border rounded-xl cursor-pointer hover:border-gray-400 transition">
+                        <input type="radio" name="projectType" value="Fotografía Institucional / Retratos" class="accent-gray-600 w-4 h-4 mt-0.5">
                         <div class="ml-3">
-                            <span class="block text-xs sm:text-sm font-semibold text-gray-700">En Estudio</span>
-                            <span class="block text-[11px] text-zinc-400">Sesión en estudio fotográfico profesional.</span>
+                            <span class="block text-xs sm:text-sm font-semibold text-gray-700">Fotografía Institucional / Retratos</span>
+                            <span class="block text-[11px] text-gray-500">Sesiones de directivos, equipo de trabajo o catálogos corporativos.</span>
                         </div>
                     </label>
 
-                    <label class="flex items-start p-3 bg-gray-50 border border-brand-border rounded-xl cursor-pointer hover:border-brand-navy/50 transition">
-                        <input type="radio" name="projectType" value="Locación / Oficina" class="accent-brand-navy w-4 h-4 mt-0.5">
+                    <label class="flex items-start p-3 bg-white border border-brand-border rounded-xl cursor-pointer hover:border-gray-400 transition">
+                        <input type="radio" name="projectType" value="Cobertura de Evento Corporativo" checked class="accent-gray-600 w-4 h-4 mt-0.5">
                         <div class="ml-3">
-                            <span class="block text-xs sm:text-sm font-semibold text-gray-700">Locación / Oficina</span>
-                            <span class="block text-[11px] text-zinc-400">Nos trasladamos a tus oficinas o locación elegida.</span>
+                            <span class="block text-xs sm:text-sm font-semibold text-gray-700">Cobertura de Evento Corporativo</span>
+                            <span class="block text-[11px] text-gray-500">Congresos, Seminarios, Aniversarios, Premiaciones, ferias, otros.</span>
                         </div>
                     </label>
+
+                    <label class="flex items-start p-3 bg-white border border-brand-border rounded-xl cursor-pointer hover:border-gray-400 transition">
+                        <input type="radio" name="projectType" value="Comercial & Spots" class="accent-gray-600 w-4 h-4 mt-0.5">
+                        <div class="ml-3">
+                            <span class="block text-xs sm:text-sm font-semibold text-gray-700">Comercial & Spots</span>
+                            <span class="block text-[11px] text-gray-500">Producción audiovisual publicitaria con storytelling, guion y edición avanzada.</span>
+                        </div>
+                    </label>
+
+                    <label class="flex items-start p-3 bg-white border border-brand-border rounded-xl cursor-pointer hover:border-gray-400 transition">
+                        <input type="radio" name="projectType" value="Streaming & Vivo Multi-Cámara" class="accent-gray-600 w-4 h-4 mt-0.5">
+                        <div class="ml-3">
+                            <span class="block text-xs sm:text-sm font-semibold text-gray-700">Streaming & Vivo Multi-Cámara</span>
+                            <span class="block text-[11px] text-gray-500">Transmisión en vivo para YouTube, LinkedIn, Zoom o redes sociales en Full HD o 4K.</span>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- Formatos de entregables requeridos -->
+                <div class="space-y-2 pt-2">
+                    <span class="block text-xs font-medium text-brand-textSecondary">Formatos y entregables deseados (puedes marcar varias):</span>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                        <label class="flex items-center gap-2 p-2.5 bg-white border border-brand-border rounded-lg cursor-pointer text-xs hover:border-gray-400 transition">
+                            <input type="checkbox" name="deliverables" value="Video Horizontal (YouTube/TV)" checked class="accent-gray-600">
+                            <span class="text-gray-700">Horizontal (16:9)</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2.5 bg-white border border-brand-border rounded-lg cursor-pointer text-xs hover:border-gray-400 transition">
+                            <input type="checkbox" name="deliverables" value="Vertical Reels/TikTok" checked class="accent-gray-600">
+                            <span class="text-gray-700">Reels/TikTok (9:16)</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2.5 bg-white border border-brand-border rounded-lg cursor-pointer text-xs hover:border-gray-400 transition">
+                            <input type="checkbox" name="deliverables" value="Fotos Alta Res" checked class="accent-gray-600">
+                            <span class="text-gray-700">Fotos Editadas</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2.5 bg-white border border-brand-border rounded-lg cursor-pointer text-xs hover:border-gray-400 transition">
+                            <input type="checkbox" name="deliverables" value="Tomas Brutas / RAW" class="accent-gray-600">
+                            <span class="text-gray-700">Material RAW</span>
+                        </label>
+                    </div>
                 </div>
             </div>
 
             <!-- SECCIÓN 4: LOGÍSTICA, LUGAR Y LOGÍSTICA DE TIEMPO -->
             <div class="space-y-4 pt-4 border-t border-brand-border">
-                <label class="block text-xs font-bold uppercase tracking-wider text-brand-navy flex items-center gap-2">
-                    <i class="fa-solid fa-location-dot"></i> 4. Logística y Tiempos
+                <label class="block text-xs font-bold uppercase tracking-wider text-brand-textAccent flex items-center gap-2">
+                    <i class="fa-solid fa-location-dot"></i> 4. Logística y Tiempos de Evento
                 </label>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
-                        <label class="block text-xs text-zinc-400 mb-1">Fecha Preferida <span class="text-brand-red">*</span></label>
-                        <input type="date" id="eventDate" required class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs focus:outline-none focus:border-brand-navy">
+                        <label class="block text-xs font-medium mb-1">Fecha del Evento *</label>
+                        <input type="date" id="eventDate" required class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs focus:outline-none focus:ring-1 focus:ring-gray-400">
                     </div>
 
                     <div>
-                        <label class="block text-xs text-zinc-400 mb-1">Cantidad de Personas a Retratar <span class="text-brand-red">*</span></label>
-                        <select id="personCount" required class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs text-zinc-700 focus:outline-none focus:border-brand-navy">
+                        <label class="block text-xs font-medium mb-1">Ciudad / Locación *</label>
+                        <input type="text" id="eventCity" required placeholder="Ej. Lima, Arequipa, Cusco" class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs focus:outline-none focus:ring-1 focus:ring-gray-400">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium mb-1">Horas de Cobertura *</label>
+                        <select id="coverageHours" required class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs focus:outline-none focus:ring-1 focus:ring-gray-400">
                             <option value="" disabled selected>-- Selecciona --</option>
-                            <option value="1 persona">1 persona (Individual)</option>
-                            <option value="2 a 5 personas">2 a 5 personas</option>
-                            <option value="6 a 15 personas">6 a 15 personas</option>
-                            <option value="Más de 15 personas">Más de 15 personas</option>
+                            <option value="1 hora">1 hora</option>
+                            <option value="2 horas">2 horas</option>
+                            <option value="4 horas">4 horas (Media Jornada)</option>
+                            <option value="6 horas">6 horas</option>
+                            <option value="8 horas">8 horas (Jornada Completa)</option>
+                            <option value="10 horas">10 horas</option>
+                            <option value="12 horas">12 horas (Evento Extenso)</option>
                         </select>
                     </div>
                 </div>
@@ -242,27 +308,27 @@
 
             <!-- SECCIÓN 5: CUALIFICACIÓN COMERCIAL (PRESUPUESTO Y TIEMPO DE ENTREGA) -->
             <div class="space-y-4 pt-4 border-t border-brand-border">
-                <label class="block text-xs font-bold uppercase tracking-wider text-brand-navy flex items-center gap-2">
-                    <i class="fa-solid fa-sack-dollar"></i> 5. Expectativa Comercial
+                <label class="block text-xs font-bold uppercase tracking-wider text-brand-textAccent flex items-center gap-2">
+                    <i class="fa-solid fa-sack-dollar"></i> 5. Expectativa Comercial y Tiempos
                 </label>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs text-zinc-400 mb-1">Presupuesto Estimado (Opcional)</label>
-                        <select id="budgetRange" class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs text-zinc-700 focus:outline-none focus:border-brand-navy">
+                        <label class="block text-xs font-medium mb-1">Rango de Presupuesto Estimado (Opcional)</label>
+                        <select id="budgetRange" class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs focus:outline-none focus:ring-1 focus:ring-gray-400">
                             <option value="No especificado" selected>Prefiero recibir la propuesta formal primero</option>
-                            <option value="Menos de S/. 500">Menos de S/. 500</option>
-                            <option value="S/. 500 - S/. 1,000">S/. 500 - S/. 1,000</option>
-                            <option value="S/. 1,000 - S/. 3,000">S/. 1,000 - S/. 3,000</option>
-                            <option value="Más de S/. 3,000">Más de S/. 3,000</option>
+                            <option value="S/. 1,500 - S/. 3,000">S/. 1,500 - S/. 3,000</option>
+                            <option value="S/. 3,000 - S/. 6,000">S/. 3,000 - S/. 6,000</option>
+                            <option value="S/. 6,000 - S/. 10,000">S/. 6,000 - S/. 10,000</option>
+                            <option value="Más de S/. 10,000">Más de S/. 10,000 (Proyecto Pro Corporativo)</option>
                         </select>
                     </div>
 
                     <div>
-                        <label class="block text-xs text-zinc-400 mb-1">Urgencia de Entrega</label>
-                        <select id="urgencyLevel" class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs text-zinc-700 focus:outline-none focus:border-brand-navy">
-                            <option value="Tiempo estándar (3 a 5 días hábiles)" selected>Estándar (3 a 5 días hábiles)</option>
-                            <option value="Entrega Express (48 hrs)">Exprés (48 horas)</option>
+                        <label class="block text-xs font-medium mb-1">Urgencia de Entrega</label>
+                        <select id="urgencyLevel" class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs focus:outline-none focus:ring-1 focus:ring-gray-400">
+                            <option value="Tiempo estándar (5 a 7 días hábiles)" selected>Estándar (5 a 7 días hábiles)</option>
+                            <option value="Entrega Express (48 hrs)">Exprés / Fast-Track (48 horas)</option>
                             <option value="Entrega Prioritaria (24 hrs)">Prioritaria (24 horas)</option>
                         </select>
                     </div>
@@ -271,36 +337,43 @@
 
             <!-- SECCIÓN 6: ORIGEN DEL LEAD Y ADJUNTO -->
             <div class="space-y-4 pt-4 border-t border-brand-border">
-                <label class="block text-xs font-bold uppercase tracking-wider text-brand-navy flex items-center gap-2">
-                    <i class="fa-solid fa-bullhorn"></i> 6. Atribución
+                <label class="block text-xs font-bold uppercase tracking-wider text-brand-textAccent flex items-center gap-2">
+                    <i class="fa-solid fa-bullhorn"></i> 6. Atribución y Archivos de Referencia
                 </label>
 
-                <div class="grid grid-cols-1 sm:grid-cols-1 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs text-zinc-400 mb-1">¿Cómo supiste de nuestro trabajo? <span class="text-brand-red">*</span></label>
-                        <select id="leadSource" required class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs text-zinc-700 focus:outline-none focus:border-brand-navy">
+                        <label class="block text-xs font-medium mb-1">¿Cómo supiste de nuestro trabajo? *</label>
+                        <select id="leadSource" required class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs focus:outline-none focus:ring-1 focus:ring-gray-400">
                             <option value="" disabled selected>-- Selecciona una opción --</option>
+                            <option value="Recomendación de entorno profesional">Recomendación de entorno profesional</option>
+                            <option value="Recomendación de amigos">Recomendación de amigos</option>
+                            <option value="Recomendación de familiares">Recomendación de familiares</option>
                             <option value="LinkedIn">LinkedIn</option>
                             <option value="Instagram">Instagram</option>
-                            <option value="Recomendación">Recomendación</option>
-                            <option value="Búsqueda en Google">Búsqueda en Google</option>
+                            <option value="Buscamos en internet">Buscamos en internet</option>
                             <option value="Otros">Otros</option>
                         </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium mb-1">Enlace a Brief / Referencias (Opcional)</label>
+                        <input type="url" id="referenceLink" placeholder="https://drive.google.com/..." class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs focus:outline-none focus:ring-1 focus:ring-gray-400">
                     </div>
                 </div>
             </div>
 
             <!-- SECCIÓN 7: MENSAJE FINAL -->
             <div class="space-y-3 pt-4 border-t border-brand-border">
-                <label class="block text-xs font-bold uppercase tracking-wider text-brand-navy flex items-center gap-2">
+                <label class="block text-xs font-bold uppercase tracking-wider text-brand-textAccent flex items-center gap-2">
                     <i class="fa-solid fa-comment-dots"></i> 7. Detalles Adicionales (Opcional)
                 </label>
-                <textarea id="optionalMessage" rows="3" placeholder="Cuéntanos más detalles sobre lo que buscas transmitir con tus fotos..." class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:border-brand-navy transition"></textarea>
+                <textarea id="optionalMessage" rows="3" placeholder="Detalles de la agenda del evento, intervenciones de autoridades, itinerario o requerimientos de iluminación..." class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:ring-1 focus:ring-gray-400 transition"></textarea>
             </div>
 
             <!-- BOTÓN DE ENVÍO -->
             <div class="pt-4 border-t border-brand-border">
-                <button type="submit" class="w-full py-4 px-6 bg-brand-navy hover:bg-opacity-90 text-white font-montserrat font-bold text-sm tracking-wider uppercase rounded-xl transition shadow-lg flex items-center justify-center gap-2">
+                <button type="submit" class="w-full py-4 px-6 bg-gray-800 hover:bg-gray-700 text-white font-montserrat font-bold text-sm tracking-wider uppercase rounded-xl transition shadow-sm flex items-center justify-center gap-2 border border-gray-900">
                     <i class="fa-solid fa-paper-plane"></i> Enviar Solicitud de Cotización
                 </button>
             </div>
@@ -308,22 +381,22 @@
 
         <!-- FOOTER CORPORATIVO -->
         <footer class="mt-8 pt-6 border-t border-brand-border text-center text-gray-500 text-[11px]">
-            <p>© 222 Studios por Richard Avila. Todos los derechos reservados.</p>
+            <p>© 2026 222 Studios S.A.C. Todos los derechos reservados.</p>
         </footer>
     </div>
 
     <!-- MODAL DE RESPUESTA DIRECTA A WHATSAPP -->
-    <div id="successModalV2" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white border border-brand-border rounded-2xl max-w-md w-full p-6 text-center space-y-4 shadow-2xl">
-            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl border border-emerald-200">
-                <i class="fa-solid fa-check-double"></i>
+    <div id="successModalV2" class="fixed inset-0 bg-white/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white border border-brand-border rounded-2xl max-w-md w-full p-6 text-center space-y-4 shadow-lg">
+            <div class="w-16 h-16 bg-gray-100 text-gray-600 rounded-full flex items-center justify-center mx-auto text-2xl border border-gray-200">
+                <i class="fa-solid fa-check"></i>
             </div>
             <h3 class="text-xl font-montserrat font-bold text-gray-900">¡Solicitud Lista!</h3>
             <p class="text-xs text-gray-600 leading-relaxed" id="modalMessageV2">
-                Tu solicitud de cotización ha sido generada. Haz clic abajo para enviarla por WhatsApp:
+                Tu solicitud de cotización para 222 Studios ha sido generada. Haz clic abajo para iniciar la conversación por WhatsApp:
             </p>
             <div id="whatsappContainerV2"></div>
-            <button onclick="closeModalV2()" class="w-full py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold text-xs rounded-lg transition">
+            <button onclick="closeModalV2()" class="w-full py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold text-xs rounded-lg transition border border-gray-300">
                 Cerrar
             </button>
         </div>
@@ -377,30 +450,37 @@
 
             const categories = Array.from(document.querySelectorAll('input[name="serviceCategory"]:checked')).map(cb => cb.value);
             const projectType = document.querySelector('input[name="projectType"]:checked')?.value || 'No especificado';
+            const deliverables = Array.from(document.querySelectorAll('input[name="deliverables"]:checked')).map(cb => cb.value);
             
             const eventDate = document.getElementById('eventDate').value;
-            const personCount = document.getElementById('personCount').value;
+            const eventCity = document.getElementById('eventCity').value;
+            const coverageHours = document.getElementById('coverageHours').value;
             
             const budgetRange = document.getElementById('budgetRange').value;
             const urgencyLevel = document.getElementById('urgencyLevel').value;
             const leadSource = document.getElementById('leadSource').value;
+            const referenceLink = document.getElementById('referenceLink').value || 'Sin enlace de referencia';
             const optionalMessage = document.getElementById('optionalMessage').value || 'Sin mensaje adicional';
 
             // Formatear mensaje ultra completo para WhatsApp
-            let whatsappMessage = `*Nueva Solicitud - Richard Avila*\n\n`;
+            let whatsappMessage = `*Nueva Solicitud de Cotización (v2.0) - 222 Studios*\n\n`;
             whatsappMessage += `👤 *Cliente:* ${fullName}\n`;
             whatsappMessage += `📱 *Teléfono:* ${phone}\n`;
             whatsappMessage += `✉️ *Correo:* ${email}\n`;
             whatsappMessage += `🔖 *Perfil:* ${profile}\n`;
             whatsappMessage += profileDetails;
-            whatsappMessage += `\n📸 *Servicios:* ${categories.length > 0 ? categories.join(', ') : 'No especificados'}\n`;
-            whatsappMessage += `📍 *Modalidad:* ${projectType}\n`;
-            whatsappMessage += `📅 *Fecha Ideal:* ${eventDate}\n`;
-            whatsappMessage += `👥 *Personas:* ${personCount}\n`;
+            whatsappMessage += `\n🎬 *Servicios:* ${categories.length > 0 ? categories.join(', ') : 'No especificados'}\n`;
+            whatsappMessage += `🎥 *Modalidad:* ${projectType}\n`;
+            whatsappMessage += `📦 *Entregables:* ${deliverables.length > 0 ? deliverables.join(', ') : 'Estándar'}\n`;
+            whatsappMessage += `📅 *Fecha:* ${eventDate}\n`;
+            whatsappMessage += `📍 *Ciudad/Locación:* ${eventCity}\n`;
+            whatsappMessage += `⏱️ *Horas:* ${coverageHours}\n`;
             whatsappMessage += `💰 *Presupuesto:* ${budgetRange}\n`;
             whatsappMessage += `⚡ *Urgencia:* ${urgencyLevel}\n`;
             whatsappMessage += `📣 *Fuente:* ${leadSource}\n`;
-            
+            if (referenceLink !== 'Sin enlace de referencia') {
+                whatsappMessage += `🔗 *Brief/Ref:* ${referenceLink}\n`;
+            }
             if (optionalMessage !== 'Sin mensaje adicional') {
                 whatsappMessage += `💬 *Mensaje:* ${optionalMessage}\n`;
             }
@@ -426,12 +506,12 @@
             .finally(() => {
                 // 3. Levantar el Modal de WhatsApp
                 const modalMessage = document.getElementById('modalMessageV2');
-                modalMessage.innerHTML = `Gracias <strong>${fullName}</strong>. Tu solicitud de cotización está lista.`;
+                modalMessage.innerHTML = `Gracias <strong>${fullName}</strong>. Tu solicitud de cotización ha sido procesada.`;
 
                 const whatsappContainer = document.getElementById('whatsappContainerV2');
                 
                 whatsappContainer.innerHTML = `
-                    <a href="https://wa.me/51941660544?text=${encodedMessage}" target="_blank" class="inline-flex items-center justify-center gap-2 w-full py-3.5 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs rounded-xl transition shadow-lg shadow-emerald-900/30 mb-2">
+                    <a href="https://wa.me/51941660544?text=${encodedMessage}" target="_blank" class="inline-flex items-center justify-center gap-2 w-full py-3.5 px-4 bg-gray-800 hover:bg-gray-700 text-white font-semibold text-xs rounded-xl transition shadow-sm mb-2 border border-gray-900">
                         <i class="fa-brands fa-whatsapp text-base"></i> Enviar solicitud por WhatsApp
                     </a>
                 `;
