@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotización - Foto LinkedIn PE</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            red: '#a23e49',
+                            redHover: '#8b353e',
+                            navy: 'rgb(41, 49, 78)', 
+                            dark: '#f8f9fa',
+                            card: '#ffffff',
+                            border: '#dee2e6'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        montserrat: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            color: #212529; 
+        }
+        
+        input[type="text"], input[type="tel"], input[type="email"], input[type="url"], input[type="date"], select, textarea {
+            color: #212529 !important;
+            background-color: #ffffff !important;
+        }
+        
+        input::placeholder, textarea::placeholder {
+            color: #6c757d !important;
+        }
+
+        .text-zinc-400 {
+            color: #6c757d !important; 
+        }
+
+        .text-zinc-200 {
+            color: #343a40 !important;
+        }
+        
+        .bg-gradient-to-b {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-zinc-900 font-sans min-h-screen py-10 px-4 flex flex-col justify-center items-center relative overflow-x-hidden selection:bg-brand-red selection:text-white">
+
+    <div class="w-full max-w-3xl bg-brand-card/90 backdrop-blur-xl border border-brand-border rounded-2xl shadow-lg p-6 sm:p-10 my-auto">
+        
+        <!-- HEADER CORPORATIVO -->
+        <header class="text-center pb-8 border-b border-brand-border mb-8">
+            <!-- Bloque de imagen reemplazado -->
+            <div class="flex justify-center mb-4">
+                <img src="./222 Studios (A4).png" alt="Foto LinkedIn PE por Richard Avila" class="h-16 md:h-20 object-contain">
+            </div>
+            
+            <h2 class="text-xl sm:text-2xl font-montserrat font-bold text-gray-800 mt-4">Cuéntanos un poco sobre ti y tu proyecto</h2>
+            <p class="text-xs sm:text-sm text-gray-600 mt-1 max-w-xl mx-auto">
+                Completa este breve cuestionario para enviarte una propuesta exacta a tu medida.
+            </p>
+        </header>
+
+        <!-- FORMULARIO PRINCIPAL DE LEADS V2.0 -->
+        <form id="leadFormV2" onsubmit="handleFormSubmitV2(event)" class="space-y-8">
+
+            <!-- SECCIÓN 1: DATOS PERSONALES Y CONTACTO -->
+            <div class="space-y-4">
+                <label class="block text-xs font-bold uppercase tracking-wider text-brand-navy flex items-center gap-2">
+                    <i class="fa-solid fa-address-card"></i> 1. Datos de Contacto
+                </label>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs text-zinc-400 mb-1">Nombre Completo <span class="text-brand-red">*</span></label>
+                        <input type="text" id="fullName" required placeholder="Ej. Richard Avila" class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:border-brand-navy transition">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs text-zinc-400 mb-1">Teléfono / WhatsApp <span class="text-brand-red">*</span></label>
+                        <input type="tel" id="phoneNumber" required placeholder="+51 941 660 544" class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:border-brand-navy transition">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs text-zinc-400 mb-1">Correo Electrónico <span class="text-brand-red">*</span></label>
+                        <input type="email" id="emailAddress" required placeholder="correo@ejemplo.com" class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:border-brand-navy transition">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 2: SELECCIÓN DE PERFIL Y CAMPOS ADAPTATIVOS -->
+            <div class="space-y-4 pt-4 border-t border-brand-border">
+                <label class="block text-xs font-bold uppercase tracking-wider text-brand-navy flex items-center gap-2">
+                    <i class="fa-solid fa-user-gear"></i> 2. ¿En representación de qué perfil nos contactas?
+                </label>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <label class="relative flex items-center p-3.5 bg-gray-50 border border-brand-border rounded-xl cursor-pointer hover:border-brand-navy/50 transition group">
+                        <input type="radio" name="clientProfile" value="Empresa" onchange="toggleProfileFieldsV2()" checked class="accent-brand-navy w-4 h-4">
+                        <span class="ml-3 text-xs sm:text-sm font-semibold text-gray-700">Empresa / Institución</span>
+                    </label>
+
+                    <label class="relative flex items-center p-3.5 bg-gray-50 border border-brand-border rounded-xl cursor-pointer hover:border-brand-navy/50 transition group">
+                        <input type="radio" name="clientProfile" value="Marca Personal" onchange="toggleProfileFieldsV2()" class="accent-brand-navy w-4 h-4">
+                        <span class="ml-3 text-xs sm:text-sm font-semibold text-gray-700">Marca Personal</span>
+                    </label>
+
+                    <label class="relative flex items-center p-3.5 bg-gray-50 border border-brand-border rounded-xl cursor-pointer hover:border-brand-navy/50 transition group">
+                        <input type="radio" name="clientProfile" value="Emprendedor / Startup" onchange="toggleProfileFieldsV2()" class="accent-brand-navy w-4 h-4">
+                        <span class="ml-3 text-xs sm:text-sm font-semibold text-gray-700">Emprendedor / Startup</span>
+                    </label>
+
+                    <label class="relative flex items-center p-3.5 bg-gray-50 border border-brand-border rounded-xl cursor-pointer hover:border-brand-navy/50 transition group">
+                        <input type="radio" name="clientProfile" value="Profesional Independiente" onchange="toggleProfileFieldsV2()" class="accent-brand-navy w-4 h-4">
+                        <span class="ml-3 text-xs sm:text-sm font-semibold text-gray-700">Profesional Independiente</span>
+                    </label>
+                </div>
+
+                <!-- BLOQUE 1: EMPRESA O STARTUP -->
+                <div id="corporateFieldsBlock" class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-3 bg-gray-50 p-4 rounded-xl border border-brand-border/60">
+                    <div>
+                        <label class="block text-xs text-zinc-400 mb-1">Nombre de la Empresa</label>
+                        <input type="text" id="companyName" placeholder="Ej. TEDx Lima" class="w-full border border-brand-border rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-brand-navy">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-zinc-400 mb-1">Área / Departamento</label>
+                        <input type="text" id="companyArea" placeholder="Ej. Marketing / Logística" class="w-full border border-brand-border rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-brand-navy">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-zinc-400 mb-1">Puesto / Cargo</label>
+                        <input type="text" id="companyRole" placeholder="Ej. Jefa / Coordinadora" class="w-full border border-brand-border rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-brand-navy">
+                    </div>
+                </div>
+
+                <!-- BLOQUE 2: MARCA PERSONAL -->
+                <div id="personalBrandBlock" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 bg-gray-50 p-4 rounded-xl border border-brand-border/60">
+                    <div>
+                        <label class="block text-xs text-zinc-400 mb-1">Rubro / Nicho de Contenido</label>
+                        <input type="text" id="brandNiche" placeholder="Ej. Fitness, Finanzas, Moda, Tecnología" class="w-full border border-brand-border rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-brand-navy">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-zinc-400 mb-1">Red Principal / Canal</label>
+                        <input type="text" id="socialMedia" placeholder="Ej. @usuario en Instagram / YouTube" class="w-full border border-brand-border rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-brand-navy">
+                    </div>
+                </div>
+
+                <!-- BLOQUE 3: PROFESIONAL INDEPENDIENTE -->
+                <div id="independentBlock" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 bg-gray-50 p-4 rounded-xl border border-brand-border/60">
+                    <div>
+                        <label class="block text-xs text-zinc-400 mb-1">Profesión / Especialidad</label>
+                        <input type="text" id="profession" placeholder="Ej. Arquitecto, Abogado, Consultor" class="w-full border border-brand-border rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-brand-navy">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-zinc-400 mb-1">Objetivo Audiovisual Principal</label>
+                        <input type="text" id="independentGoal" placeholder="Ej. Fotos Web Personal, Reels LinkedIn" class="w-full border border-brand-border rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-brand-navy">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 3: ESPECIFICACIONES TÉCNICAS DEL PROYECTO -->
+            <div class="space-y-4 pt-4 border-t border-brand-border">
+                <label class="block text-xs font-bold uppercase tracking-wider text-brand-navy flex items-center gap-2">
+                    <i class="fa-solid fa-camera"></i> 3. Tipo de Producción
+                </label>
+
+                <!-- Categorías -->
+                <div class="space-y-2">
+                    <span class="block text-xs text-zinc-400">Servicios requeridos para el proyecto:</span>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="flex items-center justify-center gap-2 p-3 bg-gray-50 border border-brand-border rounded-xl cursor-pointer hover:border-brand-navy/50 transition">
+                            <input type="checkbox" name="serviceCategory" value="Retrato Corporativo" checked class="accent-brand-navy w-4 h-4">
+                            <span class="text-xs font-semibold text-gray-700">Retrato Corporativo</span>
+                        </label>
+                        <label class="flex items-center justify-center gap-2 p-3 bg-gray-50 border border-brand-border rounded-xl cursor-pointer hover:border-brand-navy/50 transition">
+                            <input type="checkbox" name="serviceCategory" value="Fotografía de Eventos" class="accent-brand-navy w-4 h-4">
+                            <span class="text-xs font-semibold text-gray-700">Fotografía de Eventos</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Modalidad -->
+                <div class="space-y-2.5 pt-2">
+                    <span class="block text-xs text-zinc-400">Modalidad específica del servicio:</span>
+                    
+                    <label class="flex items-start p-3 bg-gray-50 border border-brand-border rounded-xl cursor-pointer hover:border-brand-navy/50 transition">
+                        <input type="radio" name="projectType" value="Estudio Fotográfico" checked class="accent-brand-navy w-4 h-4 mt-0.5">
+                        <div class="ml-3">
+                            <span class="block text-xs sm:text-sm font-semibold text-gray-700">En Estudio</span>
+                            <span class="block text-[11px] text-zinc-400">Sesión en estudio fotográfico profesional.</span>
+                        </div>
+                    </label>
+
+                    <label class="flex items-start p-3 bg-gray-50 border border-brand-border rounded-xl cursor-pointer hover:border-brand-navy/50 transition">
+                        <input type="radio" name="projectType" value="Locación / Oficina" class="accent-brand-navy w-4 h-4 mt-0.5">
+                        <div class="ml-3">
+                            <span class="block text-xs sm:text-sm font-semibold text-gray-700">Locación / Oficina</span>
+                            <span class="block text-[11px] text-zinc-400">Nos trasladamos a tus oficinas o locación elegida.</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 4: LOGÍSTICA, LUGAR Y LOGÍSTICA DE TIEMPO -->
+            <div class="space-y-4 pt-4 border-t border-brand-border">
+                <label class="block text-xs font-bold uppercase tracking-wider text-brand-navy flex items-center gap-2">
+                    <i class="fa-solid fa-location-dot"></i> 4. Logística y Tiempos
+                </label>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs text-zinc-400 mb-1">Fecha Preferida <span class="text-brand-red">*</span></label>
+                        <input type="date" id="eventDate" required class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs focus:outline-none focus:border-brand-navy">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs text-zinc-400 mb-1">Cantidad de Personas a Retratar <span class="text-brand-red">*</span></label>
+                        <select id="personCount" required class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs text-zinc-700 focus:outline-none focus:border-brand-navy">
+                            <option value="" disabled selected>-- Selecciona --</option>
+                            <option value="1 persona">1 persona (Individual)</option>
+                            <option value="2 a 5 personas">2 a 5 personas</option>
+                            <option value="6 a 15 personas">6 a 15 personas</option>
+                            <option value="Más de 15 personas">Más de 15 personas</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 5: CUALIFICACIÓN COMERCIAL (PRESUPUESTO Y TIEMPO DE ENTREGA) -->
+            <div class="space-y-4 pt-4 border-t border-brand-border">
+                <label class="block text-xs font-bold uppercase tracking-wider text-brand-navy flex items-center gap-2">
+                    <i class="fa-solid fa-sack-dollar"></i> 5. Expectativa Comercial
+                </label>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs text-zinc-400 mb-1">Presupuesto Estimado (Opcional)</label>
+                        <select id="budgetRange" class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs text-zinc-700 focus:outline-none focus:border-brand-navy">
+                            <option value="No especificado" selected>Prefiero recibir la propuesta formal primero</option>
+                            <option value="Menos de S/. 500">Menos de S/. 500</option>
+                            <option value="S/. 500 - S/. 1,000">S/. 500 - S/. 1,000</option>
+                            <option value="S/. 1,000 - S/. 3,000">S/. 1,000 - S/. 3,000</option>
+                            <option value="Más de S/. 3,000">Más de S/. 3,000</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs text-zinc-400 mb-1">Urgencia de Entrega</label>
+                        <select id="urgencyLevel" class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs text-zinc-700 focus:outline-none focus:border-brand-navy">
+                            <option value="Tiempo estándar (3 a 5 días hábiles)" selected>Estándar (3 a 5 días hábiles)</option>
+                            <option value="Entrega Express (48 hrs)">Exprés (48 horas)</option>
+                            <option value="Entrega Prioritaria (24 hrs)">Prioritaria (24 horas)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 6: ORIGEN DEL LEAD Y ADJUNTO -->
+            <div class="space-y-4 pt-4 border-t border-brand-border">
+                <label class="block text-xs font-bold uppercase tracking-wider text-brand-navy flex items-center gap-2">
+                    <i class="fa-solid fa-bullhorn"></i> 6. Atribución
+                </label>
+
+                <div class="grid grid-cols-1 sm:grid-cols-1 gap-4">
+                    <div>
+                        <label class="block text-xs text-zinc-400 mb-1">¿Cómo supiste de nuestro trabajo? <span class="text-brand-red">*</span></label>
+                        <select id="leadSource" required class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs text-zinc-700 focus:outline-none focus:border-brand-navy">
+                            <option value="" disabled selected>-- Selecciona una opción --</option>
+                            <option value="LinkedIn">LinkedIn</option>
+                            <option value="Instagram">Instagram</option>
+                            <option value="Recomendación">Recomendación</option>
+                            <option value="Búsqueda en Google">Búsqueda en Google</option>
+                            <option value="Otros">Otros</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 7: MENSAJE FINAL -->
+            <div class="space-y-3 pt-4 border-t border-brand-border">
+                <label class="block text-xs font-bold uppercase tracking-wider text-brand-navy flex items-center gap-2">
+                    <i class="fa-solid fa-comment-dots"></i> 7. Detalles Adicionales (Opcional)
+                </label>
+                <textarea id="optionalMessage" rows="3" placeholder="Cuéntanos más detalles sobre lo que buscas transmitir con tus fotos..." class="w-full border border-brand-border rounded-lg px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:border-brand-navy transition"></textarea>
+            </div>
+
+            <!-- BOTÓN DE ENVÍO -->
+            <div class="pt-4 border-t border-brand-border">
+                <button type="submit" class="w-full py-4 px-6 bg-brand-navy hover:bg-opacity-90 text-white font-montserrat font-bold text-sm tracking-wider uppercase rounded-xl transition shadow-lg flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-paper-plane"></i> Enviar Solicitud de Cotización
+                </button>
+            </div>
+        </form>
+
+        <!-- FOOTER CORPORATIVO -->
+        <footer class="mt-8 pt-6 border-t border-brand-border text-center text-gray-500 text-[11px]">
+            <p>© 2026 FOTO LINKEDIN PE por Richard Avila. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- MODAL DE RESPUESTA DIRECTA A WHATSAPP -->
+    <div id="successModalV2" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white border border-brand-border rounded-2xl max-w-md w-full p-6 text-center space-y-4 shadow-2xl">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl border border-emerald-200">
+                <i class="fa-solid fa-check-double"></i>
+            </div>
+            <h3 class="text-xl font-montserrat font-bold text-gray-900">¡Solicitud Lista!</h3>
+            <p class="text-xs text-gray-600 leading-relaxed" id="modalMessageV2">
+                Tu solicitud de cotización ha sido generada. Haz clic abajo para enviarla por WhatsApp:
+            </p>
+            <div id="whatsappContainerV2"></div>
+            <button onclick="closeModalV2()" class="w-full py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold text-xs rounded-lg transition">
+                Cerrar
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function toggleProfileFieldsV2() {
+            const selectedProfile = document.querySelector('input[name="clientProfile"]:checked')?.value;
+            
+            const corporateBlock = document.getElementById('corporateFieldsBlock');
+            const brandBlock = document.getElementById('personalBrandBlock');
+            const independentBlock = document.getElementById('independentBlock');
+
+            corporateBlock.classList.add('hidden');
+            brandBlock.classList.add('hidden');
+            independentBlock.classList.add('hidden');
+
+            if (selectedProfile === 'Empresa' || selectedProfile === 'Emprendedor / Startup') {
+                corporateBlock.classList.remove('hidden');
+            } else if (selectedProfile === 'Marca Personal') {
+                brandBlock.classList.remove('hidden');
+            } else if (selectedProfile === 'Profesional Independiente') {
+                independentBlock.classList.remove('hidden');
+            }
+        }
+
+        function handleFormSubmitV2(event) {
+            event.preventDefault();
+
+            const fullName = document.getElementById('fullName').value;
+            const phone = document.getElementById('phoneNumber').value;
+            const email = document.getElementById('emailAddress').value;
+            
+            const profile = document.querySelector('input[name="clientProfile"]:checked')?.value || 'Empresa';
+
+            let profileDetails = '';
+            if (profile === 'Empresa' || profile === 'Emprendedor / Startup') {
+                const companyName = document.getElementById('companyName').value || '---';
+                const companyArea = document.getElementById('companyArea').value || '---';
+                const companyRole = document.getElementById('companyRole').value || '---';
+                profileDetails = `🏢 *Empresa:* ${companyName}\n📌 *Área:* ${companyArea}\n👔 *Puesto:* ${companyRole}\n`;
+            } else if (profile === 'Marca Personal') {
+                const brandNiche = document.getElementById('brandNiche').value || '---';
+                const socialMedia = document.getElementById('socialMedia').value || '---';
+                profileDetails = `🎨 *Nicho:* ${brandNiche}\n📱 *Canal:* ${socialMedia}\n`;
+            } else if (profile === 'Profesional Independiente') {
+                const profession = document.getElementById('profession').value || '---';
+                const goal = document.getElementById('independentGoal').value || '---';
+                profileDetails = `💼 *Profesión:* ${profession}\n🎯 *Objetivo:* ${goal}\n`;
+            }
+
+            const categories = Array.from(document.querySelectorAll('input[name="serviceCategory"]:checked')).map(cb => cb.value);
+            const projectType = document.querySelector('input[name="projectType"]:checked')?.value || 'No especificado';
+            
+            const eventDate = document.getElementById('eventDate').value;
+            const personCount = document.getElementById('personCount').value;
+            
+            const budgetRange = document.getElementById('budgetRange').value;
+            const urgencyLevel = document.getElementById('urgencyLevel').value;
+            const leadSource = document.getElementById('leadSource').value;
+            const optionalMessage = document.getElementById('optionalMessage').value || 'Sin mensaje adicional';
+
+            // Formatear mensaje ultra completo para WhatsApp
+            let whatsappMessage = `*Nueva Solicitud - FOTO LINKEDIN PE*\n\n`;
+            whatsappMessage += `👤 *Cliente:* ${fullName}\n`;
+            whatsappMessage += `📱 *Teléfono:* ${phone}\n`;
+            whatsappMessage += `✉️ *Correo:* ${email}\n`;
+            whatsappMessage += `🔖 *Perfil:* ${profile}\n`;
+            whatsappMessage += profileDetails;
+            whatsappMessage += `\n📸 *Servicios:* ${categories.length > 0 ? categories.join(', ') : 'No especificados'}\n`;
+            whatsappMessage += `📍 *Modalidad:* ${projectType}\n`;
+            whatsappMessage += `📅 *Fecha Ideal:* ${eventDate}\n`;
+            whatsappMessage += `👥 *Personas:* ${personCount}\n`;
+            whatsappMessage += `💰 *Presupuesto:* ${budgetRange}\n`;
+            whatsappMessage += `⚡ *Urgencia:* ${urgencyLevel}\n`;
+            whatsappMessage += `📣 *Fuente:* ${leadSource}\n`;
+            
+            if (optionalMessage !== 'Sin mensaje adicional') {
+                whatsappMessage += `💬 *Mensaje:* ${optionalMessage}\n`;
+            }
+
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+
+            // 1. Preparar los datos para enviarlos a Google Apps Script
+            const payload = {
+                nombre: fullName,
+                correo: email,
+                telefono: phone,
+                perfil: profile,
+                mensajeCompleto: whatsappMessage
+            };
+
+            // 2. Enviar la petición en segundo plano
+            fetch('https://script.google.com/macros/s/AKfycbyhdH7icZJ-G4TXuU9MKcWjxj8Ih6fLu8AWoESJumtXJxmyxoEytamGEWUk4oaGWxDA6Q/exec', {
+                method: 'POST',
+                body: JSON.stringify(payload)
+            })
+            .then(response => console.log("Copia enviada al correo exitosamente."))
+            .catch(error => console.error("Error silencioso en el envío:", error))
+            .finally(() => {
+                // 3. Levantar el Modal de WhatsApp
+                const modalMessage = document.getElementById('modalMessageV2');
+                modalMessage.innerHTML = `Gracias <strong>${fullName}</strong>. Tu solicitud de cotización está lista.`;
+
+                const whatsappContainer = document.getElementById('whatsappContainerV2');
+                
+                whatsappContainer.innerHTML = `
+                    <a href="https://wa.me/51941660544?text=${encodedMessage}" target="_blank" class="inline-flex items-center justify-center gap-2 w-full py-3.5 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs rounded-xl transition shadow-lg shadow-emerald-900/30 mb-2">
+                        <i class="fa-brands fa-whatsapp text-base"></i> Enviar solicitud por WhatsApp
+                    </a>
+                `;
+
+                document.getElementById('successModalV2').classList.remove('hidden');
+            });
+        }
+
+        function closeModalV2() {
+            document.getElementById('successModalV2').classList.add('hidden');
+            document.getElementById('leadFormV2').reset();
+            toggleProfileFieldsV2();
+        }
+
+        window.onload = function() {
+            toggleProfileFieldsV2();
+        };
+    </script>
+</body>
+</html>
